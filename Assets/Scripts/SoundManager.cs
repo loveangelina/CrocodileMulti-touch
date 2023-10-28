@@ -1,14 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
-    public AudioSource bgmSource; // BGM을 위한 AudioSource 컴포넌트
-    public AudioSource sfxSource; // Sound FX를 위한 AudioSource 컴포넌트
+    public AudioSource bgmSource;
+    public AudioSource sfxSource;
 
-    public AudioClip gameStartClip; // 게임 시작 버튼을 누를 때 재생될 효과음
-    public AudioClip buttonClickClip; // 나머지 버튼을 누를 때 재생될 효과음
+    public AudioClip gameStartClip;
+    public AudioClip buttonClickClip;
+
+    public Slider bgmSlider;
+    public Slider sfxSlider;
+    public Toggle bgmToggle;
+    public Toggle sfxToggle;
 
     private static SoundManager _instance;
 
@@ -39,27 +45,54 @@ public class SoundManager : MonoBehaviour
 
         _instance = this;
         DontDestroyOnLoad(this.gameObject);
+
+        LoadAudioSettings();
     }
 
-    // BGM 볼륨 설정
+    private void Start()
+    {
+        bgmSlider.onValueChanged.AddListener(value =>
+        {
+            SetBGMVolume(value);
+            SaveAudioSettings();
+        });
+
+        sfxSlider.onValueChanged.AddListener(value =>
+        {
+            SetSoundFxVolume(value);
+            SaveAudioSettings();
+        });
+
+        bgmToggle.onValueChanged.AddListener(isMuted =>
+        {
+            MuteBGM(isMuted);
+            SaveAudioSettings();
+        });
+
+        sfxToggle.onValueChanged.AddListener(isMuted =>
+        {
+            MuteSoundFx(isMuted);
+            SaveAudioSettings();
+        });
+    }
+
+
     public void SetBGMVolume(float volume)
     {
+        Debug.Log("Setting BGM volume to: " + volume);
         bgmSource.volume = volume;
     }
 
-    // Sound FX 볼륨 설정
     public void SetSoundFxVolume(float volume)
     {
         sfxSource.volume = volume;
     }
 
-    // BGM 음소거 설정
     public void MuteBGM(bool mute)
     {
         bgmSource.mute = mute;
     }
 
-    // Sound FX 음소거 설정
     public void MuteSoundFx(bool mute)
     {
         sfxSource.mute = mute;
@@ -73,6 +106,62 @@ public class SoundManager : MonoBehaviour
     public void PlayButtonClickSound()
     {
         sfxSource.PlayOneShot(buttonClickClip);
+    }
+
+    public void SaveAudioSettings()
+    {
+        PlayerPrefs.SetFloat("BGM_VOLUME", bgmSlider.value);
+        PlayerPrefs.SetFloat("SFX_VOLUME", sfxSlider.value);
+        PlayerPrefs.SetInt("BGM_MUTE", bgmToggle.isOn ? 1 : 0);
+        PlayerPrefs.SetInt("SFX_MUTE", sfxToggle.isOn ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    public void LoadAudioSettings()
+    {
+
+
+        if (PlayerPrefs.HasKey("BGM_VOLUME"))
+        {
+            float loadedBGMVolume = PlayerPrefs.GetFloat("BGM_VOLUME");
+            bgmSlider.value = loadedBGMVolume;
+            bgmSource.volume = loadedBGMVolume;
+           
+        }
+
+        if (PlayerPrefs.HasKey("SFX_VOLUME"))
+        {
+            float loadedSFXVolume = PlayerPrefs.GetFloat("SFX_VOLUME");
+            sfxSlider.value = loadedSFXVolume;
+            sfxSource.volume = loadedSFXVolume;
+            
+        }
+
+        if (PlayerPrefs.HasKey("BGM_MUTE"))
+        {
+            bool loadedBGMMute = PlayerPrefs.GetInt("BGM_MUTE") == 1;
+            bgmToggle.isOn = loadedBGMMute;
+            bgmSource.mute = loadedBGMMute;
+            
+        }
+
+        if (PlayerPrefs.HasKey("SFX_MUTE"))
+        {
+            bool loadedSFXMute = PlayerPrefs.GetInt("SFX_MUTE") == 1;
+            sfxToggle.isOn = loadedSFXMute;
+            sfxSource.mute = loadedSFXMute;
+            
+        }
+        if (!PlayerPrefs.HasKey("ISSAVE"))
+        {
+            bgmSlider.value = 1.0f;
+            sfxSlider.value = 1.0f;
+            bgmToggle.isOn = false;
+            sfxToggle.isOn = false;
+
+            SaveAudioSettings();
+            PlayerPrefs.SetInt("ISSAVE", 1);
+        }
     }
 
 }
