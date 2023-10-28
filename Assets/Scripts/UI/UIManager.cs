@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour
             return _instance;
         }
     }
-    
+
 
     private void Awake()
     {
@@ -40,8 +40,7 @@ public class UIManager : MonoBehaviour
     }
     #endregion
 
-
-
+    #region 변수들
     //버튼 연결 변수
 
     public Button btnSetting;
@@ -59,86 +58,109 @@ public class UIManager : MonoBehaviour
     //셋팅 창 관련 변수
     public Slider sldSoundFxVolume;
     public Slider sldBGMVolume;
-  
+
     public Toggle toggleSoundFxMute;
     public Toggle toggleBGMMute;
 
 
     private bool isSoundFxMuted = false;
     private bool isBGMMuted = false;
+    #endregion
 
-
+    #region AddListner 연결
     private void Start()
-    {
-        btnExit.onClick.AddListener(() =>
         {
-            SoundManager.Instance.PlayButtonClickSound();
-            OnClickExit();
-        });
-        btnSetting.onClick.AddListener(() =>
-        {
-            SoundManager.Instance.PlayButtonClickSound();
-            OnClickToggleSetting();
-        });
-        btnMin.onClick.AddListener(() =>
-        {
-            SoundManager.Instance.PlayButtonClickSound();
-            OnClickDecrease();
-        });
-        btnMax.onClick.AddListener(() =>
-        {
-            SoundManager.Instance.PlayButtonClickSound();
-            OnClickIncrease();
-        });
-        btnGameStart.onClick.AddListener(() =>
-        {
-            SoundManager.Instance.PlayGameStartSound();
-            OnClickGameStart();
-        });
+            //버튼 AddListner
+            btnExit.onClick.AddListener(() =>
+            {
+                SoundManager.Instance.PlayButtonClickSound();
+                OnClickExit();
+            });
+            btnSetting.onClick.AddListener(() =>
+            {
+                SoundManager.Instance.PlayButtonClickSound();
+                OnClickToggleSetting();
+            });
+            btnMin.onClick.AddListener(() =>
+            {
+                SoundManager.Instance.PlayButtonClickSound();
+                OnClickDecrease();
+            });
+            btnMax.onClick.AddListener(() =>
+            {
+                SoundManager.Instance.PlayButtonClickSound();
+                OnClickIncrease();
+            });
+            btnGameStart.onClick.AddListener(() =>
+            {
+                SoundManager.Instance.PlayGameStartSound();
+                OnClickGameStart();
+            });
 
 
         //사운드
-        sldBGMVolume.onValueChanged.AddListener(SetBGMVolume);
-        sldSoundFxVolume.onValueChanged.AddListener(SetSoundFxVolume);
-        toggleBGMMute.onValueChanged.AddListener(ToggleBGMMute);
-        toggleSoundFxMute.onValueChanged.AddListener(ToggleSoundFxMute);
+        sldBGMVolume.onValueChanged.AddListener((value) =>
+        {
+            SoundManager.Instance.SetBGMVolume(value);
+         
+        });
+
+        sldSoundFxVolume.onValueChanged.AddListener((value) =>
+        {
+            SoundManager.Instance.SetSoundFxVolume(value);
+            
+        });
+
+        toggleBGMMute.onValueChanged.AddListener((isMuted) =>
+        {
+            SoundManager.Instance.MuteBGM(isMuted);
+           
+        });
+
+        toggleSoundFxMute.onValueChanged.AddListener((isMuted) =>
+        {
+            SoundManager.Instance.MuteSoundFx(isMuted);
+          
+        });
     }
+
+        #endregion
 
     #region TITLE 씬 버튼 기능 함수
-    //게임 종료
-    public void OnClickExit()
-    {
-        Application.Quit();
-    }
-    //Setting 창 활성화/비활성화
-    public void OnClickToggleSetting()
-    {
-        pnlSetting.SetActive(!pnlSetting.activeSelf);
-    }
-
-    //
-    public void OnClickIncrease()
-    {
-        value = int.Parse(txtSelect.text);
-        if (value < 5)
+        //게임 종료
+        public void OnClickExit()
         {
-            txtSelect.text = (value + 1).ToString();
+            Application.Quit();
         }
-    }
-
-    public void OnClickDecrease()
-    {
-        value = int.Parse(txtSelect.text);
-        if (value > 1)
+        //Setting 창 활성화/비활성화
+        public void OnClickToggleSetting()
         {
-            txtSelect.text = (value - 1).ToString();
+            pnlSetting.SetActive(!pnlSetting.activeSelf);
         }
-    }
-    //게임 시작
-    public void OnClickGameStart()
-    {
-        SceneManager.LoadScene("Game"); 
-    }
+
+        //Max버튼 클릭시 value 값 1씩 증가 최대 5
+        public void OnClickIncrease()
+        {
+            value = int.Parse(txtSelect.text);
+            if (value < 5)
+            {
+                txtSelect.text = (value + 1).ToString();
+            }
+        }
+        //Min버튼 클릭시 value 값 1씩 감소 최소 1
+        public void OnClickDecrease()
+        {
+            value = int.Parse(txtSelect.text);
+            if (value > 1)
+            {
+                txtSelect.text = (value - 1).ToString();
+            }
+        }
+        //게임 시작
+        public void OnClickGameStart()
+        {
+            SceneManager.LoadScene("Game");
+        }
     #endregion
 
     #region SETTING 창 기능 함수
@@ -163,6 +185,7 @@ public class UIManager : MonoBehaviour
 
     public void SetBGMVolume(float volume)
     {
+        Debug.Log("Setting BGM volume to: " + volume);
         SoundManager.Instance.SetBGMVolume(volume);
 
         if (volume <= 0)
@@ -202,4 +225,6 @@ public class UIManager : MonoBehaviour
 
 
 }
+
+
 
