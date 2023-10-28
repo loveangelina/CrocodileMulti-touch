@@ -4,22 +4,75 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    private static SoundManager instance;
+    public AudioSource bgmSource; // BGM을 위한 AudioSource 컴포넌트
+    public AudioSource sfxSource; // Sound FX를 위한 AudioSource 컴포넌트
 
-    public static SoundManager Instance => instance;
+    public AudioClip gameStartClip; // 게임 시작 버튼을 누를 때 재생될 효과음
+    public AudioClip buttonClickClip; // 나머지 버튼을 누를 때 재생될 효과음
+
+    private static SoundManager _instance;
+
+    public static SoundManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<SoundManager>();
+                if (_instance == null)
+                {
+                    GameObject obj = new GameObject();
+                    _instance = obj.AddComponent<SoundManager>();
+                }
+            }
+            return _instance;
+        }
+    }
 
     private void Awake()
     {
-        // 인스턴스가 이미 존재하는 경우, 새로 생기는 인스턴스 삭제
-        if (instance)
+        if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
             return;
         }
 
-        // 인스턴스를 유일 오브젝트로 만듦
-        instance = this;
-
-        DontDestroyOnLoad(gameObject);
+        _instance = this;
+        DontDestroyOnLoad(this.gameObject);
     }
+
+    // BGM 볼륨 설정
+    public void SetBGMVolume(float volume)
+    {
+        bgmSource.volume = volume;
+    }
+
+    // Sound FX 볼륨 설정
+    public void SetSoundFxVolume(float volume)
+    {
+        sfxSource.volume = volume;
+    }
+
+    // BGM 음소거 설정
+    public void MuteBGM(bool mute)
+    {
+        bgmSource.mute = mute;
+    }
+
+    // Sound FX 음소거 설정
+    public void MuteSoundFx(bool mute)
+    {
+        sfxSource.mute = mute;
+    }
+
+    public void PlayGameStartSound()
+    {
+        sfxSource.PlayOneShot(gameStartClip);
+    }
+
+    public void PlayButtonClickSound()
+    {
+        sfxSource.PlayOneShot(buttonClickClip);
+    }
+
 }
