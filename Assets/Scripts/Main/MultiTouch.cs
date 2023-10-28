@@ -5,11 +5,9 @@ using UnityEngine;
 
 public class MultiTouch : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI text;
-
     void Start()
     {
-        // 참여인원 수만큼 터치되면 시작함 
+        // starts after all participants touch.
         StartCoroutine(SelectPunisher());
     }
 
@@ -29,9 +27,9 @@ public class MultiTouch : MonoBehaviour
 
     IEnumerator SelectPunisher()
     {
+        // TODO : edit this seconds
         yield return new WaitForSeconds(2f);
         int touchCount = Input.touchCount;
-        text.text = touchCount.ToString();
         Vector2[] touchPositions = GetTouchPoints(touchCount);
 
         if (touchCount > 0)
