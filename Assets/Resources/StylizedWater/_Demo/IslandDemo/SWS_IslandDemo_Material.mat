@@ -60,6 +60,7 @@ Material:
     - _ENABLE_SHADOWS: 0
     - _ENABLE_VC: 0
     - _EdgeFade: 1.74
+    - _EnableDepthTexture: 1
     - _FoamDistortion: 0.61
     - _FoamOpacity: 0.07
     - _FoamSize: 0
@@ -79,7 +80,7 @@ Material:
     - _RT_REFRACTION: 0
     - _ReflectionFresnel: 2.78
     - _ReflectionRefraction: 0.006
-    - _ReflectionStrength: 1
+    - _ReflectionStrength: 0
     - _RefractionAmount: 0.017
     - _RimDistance: 0
     - _RimDistortion: 0.11
