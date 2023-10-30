@@ -39,13 +39,16 @@ namespace StylizedWaterShader
             {
                 cameraRotSide += Input.GetAxis("Mouse X") * 5;
                 cameraRotUp -= Input.GetAxis("Mouse Y") * 5;
+
             }
             else
             {
                 cameraRotSide += idleRotationSpeed;
             }
             cameraRotSideCur = Mathf.LerpAngle(cameraRotSideCur, cameraRotSide, Time.deltaTime * 5);
-            cameraRotUpCur = Mathf.Lerp(cameraRotUpCur, cameraRotUp, Time.deltaTime * 5);
+            //cameraRotUpCur = Mathf.Lerp(cameraRotUpCur, cameraRotUp, Time.deltaTime * 5);
+            cameraRotUpCur = Mathf.Clamp(Mathf.Lerp(cameraRotUpCur, cameraRotUp, Time.deltaTime * 5), 0f, 90f);
+
 
             if (Input.GetMouseButton(1) && enableMouse)
             {
