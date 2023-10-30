@@ -71,7 +71,7 @@ Material:
     - _FoamSpeed: 0.1
     - _FoamTiling: 0.15
     - _Fresnelexponent: 2.6
-    - _Glossiness: 1
+    - _Glossiness: 0.199
     - _HighlightPanning: 0
     - _LIGHTING: 0
     - _MACRO_WAVES: 0
