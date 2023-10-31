@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+
 using UnityEngine;
 
 public class Look : MonoBehaviour
@@ -9,13 +11,16 @@ public class Look : MonoBehaviour
     public float waitTime;
     public float startWaitTime;
     public float rotate = 0.5f;
+    public float attackRotate = 0.5f;
     public float respon = 5f;
     public Transform[] moveSpot;
+    
     private int randomSpot;
     public bool IsTouch;
     public bool IsMove;
     Animator animator;
-    
+
+    public List<Vector3> attackSpots = new List<Vector3>();
     private void Start()
     {
         waitTime = startWaitTime;
@@ -73,7 +78,27 @@ public class Look : MonoBehaviour
                 //움직임 x
             }
         }
-        
+        if (Input.GetMouseButtonDown(0)) //마우스 왼쪽 버튼을 누르면
+        {
+
+            //누른 위치 구하기
+            Vector3 AttackPoint = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
+            //누른 위치 attackSpot 리스트에 삽입
+            
+            attackSpots.Add(AttackPoint);
+            Debug.Log(attackSpots);
+
+            //누른 위치로 악어가 이동
+
+            //transform.position = Vector3.MoveTowards(transform.position, new Vector3(AttackPoint.x, 0, AttackPoint.z), speed * Time.deltaTime);
+            //누른 위치로 악어가 부드럽게 회전
+            //Quaternion AttackAngle = Quaternion.LookRotation(new Vector3(AttackPoint.x,transform.position.y,AttackPoint.z));
+            //transform.rotation = Quaternion.Slerp(transform.rotation,AttackAngle, attackRotate * Time.deltaTime);
+            //악어가 위치로 가까이 이동하면 공격 애니메이션 재생
+           
+            //위치 포인트 로그
+            Debug.Log(AttackPoint.ToString());
+        }
 
         
         else //터치 할때
