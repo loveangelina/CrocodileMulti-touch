@@ -66,9 +66,17 @@ public class Click : MonoBehaviour
                 ShouldAttack = true;//공격 가능              
             }
             if (ShouldAttack)
-            {               
-                animator.SetBool("Attack", true);//공격 애니메이션 재생          
+            {
+                StartCoroutine(attack()); //공격 애니메이션 재생          
             }
         }
+    }
+    IEnumerator attack()
+    {
+        animator.SetBool("Attack", true);
+
+        yield return new WaitForSeconds(1f);
+
+        animator.SetBool("Attack", false);
     }
 }
