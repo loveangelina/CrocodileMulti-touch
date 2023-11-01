@@ -16757,7 +16757,7 @@ MonoBehaviour:
   shader: {fileID: 4800000, guid: 644d4419f6d30214892dd65158332ba7, type: 3}
   renderQueue: 3000
   enableVertexColors: 0
-  enableDepthTex: 1
+  enableDepthTex: 0
   isUnlit: 0
   enableGradient: 0
   colorGradient:
