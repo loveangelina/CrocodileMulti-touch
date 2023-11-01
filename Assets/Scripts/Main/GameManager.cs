@@ -5,8 +5,15 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
-
     public static GameManager Instance => instance;
+
+    private List<GameObject> touchpoints;
+
+    public List<GameObject> Touchpoints
+    {
+        get { return touchpoints; }
+        set { touchpoints = value; }
+    }
 
     private void Awake()
     {
