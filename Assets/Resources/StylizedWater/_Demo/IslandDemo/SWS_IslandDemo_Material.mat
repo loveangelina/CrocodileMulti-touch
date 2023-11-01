@@ -60,7 +60,7 @@ Material:
     - _ENABLE_SHADOWS: 0
     - _ENABLE_VC: 0
     - _EdgeFade: 1.74
-    - _EnableDepthTexture: 1
+    - _EnableDepthTexture: 0
     - _FoamDistortion: 0.61
     - _FoamOpacity: 0.07
     - _FoamSize: 0
