@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Click : MonoBehaviour
+public class TouchScreen : MonoBehaviour
 {
     public float moveSpeed = 10f;
+    public float upSpeed = 100f;
 
     public float rotateSpeed = 10f;
 
@@ -13,53 +14,41 @@ public class Click : MonoBehaviour
     public float waitTime = 2f;
     public bool ShoudMove = false;
     public bool ShouldAttack = false;
-    private Look look;
+    private MoveAround moveAround;
 
     Animator animator;
+    ParticleSystem Swim;
+    GameManager gameManager;
+    GameObject punisher;
     // Start is called before the first frame update
     void Start()
     {
-        look = GetComponent<Look>();
+        moveAround = GetComponent<MoveAround>();
         animator = GetComponent<Animator>();
+        punisher =GameManager.Instance.Touchpoints[GameManager.Instance.TouchpointIndex];//패배자 선정
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) //마우스 왼쪽 버튼 클릭시
-        {
-            
-            look.IsTouch = true; // 손가락 터치가 true
-
-            look.IsMove = true;
-
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, 1000f))
-            {
-                destinationPoint = new Vector3(hit.point.x, transform.position.y, hit.point.z); //포인트의 위치를  hit포인트로 새로 지정, y축은 악어의 위치로
-
-                ShoudMove = true; // 움직임이 true 로 바뀜
-            }
-        }
+        
+        
         if (ShoudMove) // 움직임이 true 일때 실행
         {
-            //이동 애니메이션 재생
+            moveAround.IsAround = false;//랜덤이동금지
             animator.SetBool("Sprint", true);
             //공격 애니메이션 멈춤
             animator.SetBool("Attack", false);
             //악어가 보아야할 방향을 targetRotation 로 지정
-            Quaternion targetRotation = Quaternion.LookRotation(destinationPoint - transform.position);
+            Quaternion targetRotation = Quaternion.LookRotation(punisher.transform.position - transform.position);
             //회전을 스무스 하게 targetRotation 방향으로 함 
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed*Time.deltaTime);
             //움직임은 포인트의 위치로 이동
-            transform.position = Vector3.MoveTowards(transform.position, destinationPoint, moveSpeed*Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, punisher.transform.position, moveSpeed*Time.deltaTime);
             //공격 비활성화
             ShouldAttack = false;
             //포인트의 위치가 0.2f보다 가까워 지면 
-            if (Vector3.Distance(transform.position,destinationPoint)<= 0.2f)
+            if (Vector3.Distance(transform.position, punisher.transform.position) <= 0.2f)
             {
                 ShoudMove = false; //움직임 멈춤
                 animator.SetBool("Sprint", false);//이동 애니메이션 멈춤
@@ -78,17 +67,19 @@ public class Click : MonoBehaviour
     {
         animator.SetBool("Attack", true);
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.4f);
 
         animator.SetBool("Attack", false);
     }
     IEnumerator attackRotation()
     {
+        Swim.Stop();
         transform.Rotate(new Vector3(-90,0,0)*0.8f);
-        
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, 100f, transform.position.z), upSpeed);
         yield return new WaitForSeconds(1.4f); // 1초대기
-
+        transform.position = new Vector3(transform.position.x, 12, transform.position.z);
         transform.Rotate(new Vector3(90, 0, 0) * 0.8f);
+        Swim.Play();
 
     }
 }
