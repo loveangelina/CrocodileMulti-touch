@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class MoveAround : MonoBehaviour
 {
-    public float waitTime;
-    public float startWaitTime;
+    [SerializeField] float waitTime;
+    [SerializeField] float startWaitTime;
     public bool IsAround;
-    public float AroundSpeed = 10f;
-    public float AroundAngleSpeed = 0.5f;
+    [SerializeField] float AroundSpeed = 10f;
+    [SerializeField] float AroundAngleSpeed = 0.5f;
     Vector3 target;
     Animator animator;
     RandMove randMove;
@@ -46,12 +46,7 @@ public class MoveAround : MonoBehaviour
                     waitTime -= Time.deltaTime;
                 }
             }
-
-
-
         }
-
-
     }
     public void MakingAroundSpot()
     {

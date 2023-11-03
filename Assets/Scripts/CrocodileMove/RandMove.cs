@@ -7,28 +7,17 @@ using UnityEngine;
 
 public class RandMove : MonoBehaviour
 {
-    public float speed;
-    public float waitTime;
-    public float startWaitTime;
-    public float rotate = 0.5f;
-    public float attackRotate = 0.5f;
-    public float respon = 5f;
-    
-    public Transform[] moveSpot;
-
-    public Vector3 destPos;
-    public Vector3 dir;
-    public Quaternion lookTarget;
-
-    private int randomSpot;
-    public bool IsTouch;
-    public bool IsMove;
-    Animator animator;
-
-    public Vector3 mousePosition;
-    public Vector3 worldPosition;
-
-
+   [SerializeField] float speed;
+   [SerializeField] float waitTime;
+   [SerializeField] float startWaitTime;
+   [SerializeField] float rotate = 0.5f;
+   [SerializeField] float attackRotate = 0.5f;
+   [SerializeField] float respon = 5f;
+   [SerializeField] Transform[] moveSpot;
+   int randomSpot;
+   public bool IsTouch;
+   public bool IsMove;
+   Animator animator;
     private void Start()
     {
         waitTime = startWaitTime;

@@ -4,22 +4,18 @@ using UnityEngine;
 
 public class TouchScreen : MonoBehaviour
 {
-    public float moveSpeed = 10f;
-    public float upSpeed = 100f;
-
-    public float rotateSpeed = 10f;
-
-    public Vector3 destinationPoint;
-
-    public float waitTime = 2f;
+   [SerializeField] float moveSpeed = 10f;
+   [SerializeField] float upSpeed = 100f;
+   [SerializeField] float rotateSpeed = 10f;
+   [SerializeField] float waitTime = 2f;
     public bool ShoudMove = false;
     public bool ShouldAttack = false;
     private MoveAround moveAround;
 
     Animator animator;
     ParticleSystem Swim;
-    GameManager gameManager;
     GameObject punisher;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +32,7 @@ public class TouchScreen : MonoBehaviour
         if (ShoudMove) // 움직임이 true 일때 실행
         {
             moveAround.IsAround = false;//랜덤이동금지
+            //수영 애니메이션 실행
             animator.SetBool("Sprint", true);
             //공격 애니메이션 멈춤
             animator.SetBool("Attack", false);
