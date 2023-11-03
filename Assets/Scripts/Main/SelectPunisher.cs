@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class MultiTouch : MonoBehaviour
+public class SelectPunisher : MonoBehaviour
 {
     void Start()
     {
         // starts after all participants touch.
-        StartCoroutine(SelectPunisher());
+        StartCoroutine(GetPositionOfPunisher());
     }
 
     private Vector2[] GetTouchPoints(int touchCount)
@@ -25,18 +25,15 @@ public class MultiTouch : MonoBehaviour
         return touchPositions;
     }
 
-    IEnumerator SelectPunisher()
+    IEnumerator GetPositionOfPunisher()
     {
         // TODO : edit this seconds
         yield return new WaitForSeconds(2f);
-        int touchCount = Input.touchCount;
-        Vector2[] touchPositions = GetTouchPoints(touchCount);
+        int numberOfParticipants = int.Parse(UIManager.Instance.txtSelect.text);
+        List<GameObject> touchpoints = GameManager.Instance.Touchpoints;
 
-        if (touchCount > 0)
-        {
-            int randomIndex = Random.Range(0, touchCount);
-            Vector2 selectedPosition = touchPositions[randomIndex];
-            Debug.Log("선택된 위치 : " + selectedPosition);
-        }
+        int randomIndex = Random.Range(0, numberOfParticipants);
+        Vector3 selectedPosition = touchpoints[randomIndex].transform.position;
+        Debug.Log("선택된 위치 : " + selectedPosition);
     }
 }
