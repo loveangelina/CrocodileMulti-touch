@@ -184,7 +184,7 @@ public class UIManager : MonoBehaviour
     //게임 시작
     public void OnClickGameStart()
         {
-            SceneManager.LoadScene("SWS_LakeDemo", LoadSceneMode.Additive);
+            SceneManager.LoadScene("LakeScene");
             TitleUIcanvas.gameObject.SetActive(false);
         GameUIcanvas.gameObject.SetActive(true);
         txtGameStart.gameObject.SetActive(true);

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.25056708, g: 0.56171304, b: 0.72961843, a: 1}
+  m_IndirectSpecularColor: {r: 0.25058198, g: 0.5617277, b: 0.7296322, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7058,8 +7058,8 @@ GameObject:
   m_Component:
   - component: {fileID: 813950202}
   - component: {fileID: 813950201}
-  - component: {fileID: 813950198}
   - component: {fileID: 813950197}
+  - component: {fileID: 813950198}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -10189,7 +10189,6 @@ MonoBehaviour:
   screenWidth: 0
   screenHeight: 0
   debugMode: 0
-  isTouchingCircle: 0
 --- !u!4 &1207201848
 Transform:
   m_ObjectHideFlags: 0
@@ -15524,8 +15523,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shaderNames:
+  - Desktop
   - Mobile
-  shaderIndex: 0
+  shaderIndex: 1
   shader: {fileID: 4800000, guid: 644d4419f6d30214892dd65158332ba7, type: 3}
   renderQueue: 3000
   enableVertexColors: 1
@@ -15669,7 +15669,7 @@ MonoBehaviour:
   currentCam: {fileID: 813950201}
   material: {fileID: 2100000, guid: f6317624d362488489be67462f09d002, type: 2}
   isMobileAdvanced: 1
-  isMobilePlatform: 1
+  isMobilePlatform: 0
   shaderName: StylizedWater/Mobile
   isWaterLayer: 1
   hasShaderParams: 1
