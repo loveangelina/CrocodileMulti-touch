@@ -3,33 +3,31 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class SelectPunisher : MonoBehaviour
+public class SelectPunisher : ScenarioBase
 {
-    void Start()
+    public override void Enter(ScenarioController controller)
     {
         // starts after all participants touch.
         StartCoroutine(GetPositionOfPunisher());
+
+        // TODO : 코루틴 없애기
     }
 
-    private Vector2[] GetTouchPoints(int touchCount)
+    public override void Execute(ScenarioController controller)
     {
-        Vector2[] touchPositions = new Vector2[touchCount];
 
-        for(int i = 0; i < touchCount; i++)
-        {
-            Touch touch = Input.GetTouch(i);
-            touchPositions[i] = touch.position;
-            Debug.Log("위치 : " + touchPositions[i]);
-        }
+    }
 
-        return touchPositions;
+    public override void Exit()
+    {
+
     }
 
     IEnumerator GetPositionOfPunisher()
     {
         // TODO : edit this seconds
         yield return new WaitForSeconds(2f);
-        int numberOfParticipants = int.Parse(UIManager.Instance.txtSelect.text);
+        int numberOfParticipants = UIManager.Instance.value;
         List<GameObject> touchpoints = GameManager.Instance.Touchpoints;
 
         int randomIndex = Random.Range(0, numberOfParticipants);

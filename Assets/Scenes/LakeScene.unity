@@ -292,7 +292,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &14790532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1108,7 +1108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 37587f7fd4d749845bd8ad2748c194a3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 37587f7fd4d749845bd8ad2748c194a3, type: 3}
       propertyPath: m_Controller
@@ -9457,7 +9457,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1105215820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9471,7 +9471,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scenarios:
-  - {fileID: 0}
+  - {fileID: 400578008}
+  - {fileID: 1934361937}
+  - {fileID: 2146644585}
   nextSceneName: 
 --- !u!4 &1105215821
 Transform:
@@ -10255,7 +10257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1207201847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15391,6 +15393,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1934361936}
+  - component: {fileID: 1934361937}
   m_Layer: 0
   m_Name: 01_CheckNumberOfTouchpoints
   m_TagString: Untagged
@@ -15412,6 +15415,25 @@ Transform:
   m_Father: {fileID: 1105215821}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1934361937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934361935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54dff5d5d84a727438bcac8760277145, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rad: 30
+  downLeft: {fileID: 390553086}
+  upLeft: {fileID: 8639111}
+  upRight: {fileID: 700129735}
+  screenWidth: 0
+  screenHeight: 0
+  debugMode: 0
 --- !u!1001 &1960671829
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15724,9 +15746,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shaderNames:
-  - Desktop
   - Mobile
-  shaderIndex: 1
+  shaderIndex: 0
   shader: {fileID: 4800000, guid: 644d4419f6d30214892dd65158332ba7, type: 3}
   renderQueue: 3000
   enableVertexColors: 1
@@ -15867,10 +15888,10 @@ MonoBehaviour:
   lightingMethod: 1
   enableShadows: 1
   shadowCaster: {fileID: 1628943269}
-  currentCam: {fileID: 813950201}
+  currentCam: {fileID: 0}
   material: {fileID: 2100000, guid: f6317624d362488489be67462f09d002, type: 2}
   isMobileAdvanced: 1
-  isMobilePlatform: 0
+  isMobilePlatform: 1
   shaderName: StylizedWater/Mobile
   isWaterLayer: 1
   hasShaderParams: 1
@@ -16606,6 +16627,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2146644584}
+  - component: {fileID: 2146644585}
   m_Layer: 0
   m_Name: 02_SelectPunisher
   m_TagString: Untagged
