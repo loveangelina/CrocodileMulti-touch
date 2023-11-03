@@ -13026,6 +13026,7 @@ GameObject:
   - component: {fileID: 1493190548}
   - component: {fileID: 1493190547}
   - component: {fileID: 1493190546}
+  - component: {fileID: 1493190550}
   m_Layer: 5
   m_Name: GameUIcanvas
   m_TagString: Untagged
@@ -13115,6 +13116,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1493190550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493190545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 014d998627b19104b9292fadb05353ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1521810427 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000011700615506, guid: 3ef6fdd02ee48e943bffa1cdaee8fd90, type: 3}
@@ -16752,12 +16765,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shaderNames:
+  - Desktop
   - Mobile
-  shaderIndex: 0
+  shaderIndex: 1
   shader: {fileID: 4800000, guid: 644d4419f6d30214892dd65158332ba7, type: 3}
   renderQueue: 3000
   enableVertexColors: 0
-  enableDepthTex: 1
+  enableDepthTex: 0
   isUnlit: 0
   enableGradient: 0
   colorGradient:
@@ -16897,7 +16911,7 @@ MonoBehaviour:
   currentCam: {fileID: 813950201}
   material: {fileID: 2100000, guid: b56c186fcd781b54eafcd22192812439, type: 2}
   isMobileAdvanced: 1
-  isMobilePlatform: 1
+  isMobilePlatform: 0
   shaderName: StylizedWater/Mobile
   isWaterLayer: 1
   hasShaderParams: 1
