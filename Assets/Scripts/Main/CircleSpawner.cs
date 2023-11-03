@@ -13,7 +13,7 @@ public class CircleSpawner : MonoBehaviour
 
     void Start()
     {
-        //numberOfParticipants = int.Parse(UIManager.Instance.txtSelect.text);
+        numberOfParticipants = UIManager.Instance.value;
         obstacleLayer = LayerMask.GetMask("Terrain", "Effect");
         SpawnCircles();
     }
