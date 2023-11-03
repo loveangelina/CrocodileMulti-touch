@@ -48,12 +48,16 @@ public class UIManager : MonoBehaviour
     public Button btnMin;
     public Button btnMax;
     public Button btnGameStart;
+    public Button btnExitset;
 
+ 
     public GameObject pnlSetting;
+    public GameObject pnlTouchagain;
     public Text txtSelect;
+    public Text txtGameStart;
 
     //인원 선택 변수
-    private int value = 1;
+    public int value = 2;
 
     //셋팅 창 관련 변수
     public Slider sldSoundFxVolume;
@@ -65,6 +69,13 @@ public class UIManager : MonoBehaviour
 
     private bool isSoundFxMuted = false;
     private bool isBGMMuted = false;
+
+
+    public Canvas TitleUIcanvas;
+    public Canvas GameUIcanvas;
+
+    float countdownTime = 5f;
+
     #endregion
 
     #region AddListner 연결
@@ -96,6 +107,11 @@ public class UIManager : MonoBehaviour
                 SoundManager.Instance.PlayGameStartSound();
                 OnClickGameStart();
             });
+        btnExitset.onClick.AddListener(() =>
+        {
+            SoundManager.Instance.PlayButtonClickSound();
+            OnClickToggleSetting();
+        });
 
 
         //사운드
@@ -138,29 +154,56 @@ public class UIManager : MonoBehaviour
             pnlSetting.SetActive(!pnlSetting.activeSelf);
         }
 
-        //Max버튼 클릭시 value 값 1씩 증가 최대 5
-        public void OnClickIncrease()
+    // Increase 버튼 클릭시 value 값 1씩 증가, 최대 5
+    public void OnClickIncrease()
+    {
+        value = int.Parse(txtSelect.text);
+
+        if (value < 5)
         {
-            value = int.Parse(txtSelect.text);
-            if (value < 5)
-            {
-                txtSelect.text = (value + 1).ToString();
-            }
+            value += 1;
+            txtSelect.text = value.ToString();
         }
-        //Min버튼 클릭시 value 값 1씩 감소 최소 1
-        public void OnClickDecrease()
+
+        Debug.Log(value);
+    }
+
+    // Decrease 버튼 클릭시 value 값 1씩 감소, 최소 2
+    public void OnClickDecrease()
+    {
+        value = int.Parse(txtSelect.text);
+
+        if (value > 2)
         {
-            value = int.Parse(txtSelect.text);
-            if (value > 1)
-            {
-                txtSelect.text = (value - 1).ToString();
-            }
+            value -= 1;
+            txtSelect.text = value.ToString();
         }
-        //게임 시작
-        public void OnClickGameStart()
+
+        Debug.Log(value);
+    }
+    //게임 시작
+    public void OnClickGameStart()
         {
-            SceneManager.LoadScene("Game");
+            SceneManager.LoadScene("LakeScene");
+            TitleUIcanvas.gameObject.SetActive(false);
+        GameUIcanvas.gameObject.SetActive(true);
+        txtGameStart.gameObject.SetActive(true);
+        StartCoroutine(Countdown());
+
         }
+
+    private IEnumerator Countdown()
+    {
+        while (countdownTime > 0)
+        {
+            txtGameStart.text = "TOUCH ALL OF THEM IN " + Mathf.Ceil(countdownTime) + " SECONDS !";
+            countdownTime -= Time.deltaTime;
+            yield return null;
+        }
+
+        txtGameStart.gameObject.SetActive(false);
+    }
+
     #endregion
 
     #region SETTING 창 기능 함수
@@ -222,7 +265,21 @@ public class UIManager : MonoBehaviour
 
     #endregion
 
+    public void TocuhAgain()
+    {
+        pnlTouchagain.SetActive(true); // Panel을 활성화
 
+        // 2초 뒤에 비활성화
+        StartCoroutine(DeactivatePanelAfterDelay(2f));
+    }
+
+    // 일정 시간이 지난 후 Panel을 비활성화하는 코루틴
+    private IEnumerator DeactivatePanelAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay); // 지정된 시간만큼 대기
+
+        pnlTouchagain.SetActive(false); // Panel을 비활성화
+    }
 
 }
 

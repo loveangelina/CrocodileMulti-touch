@@ -5,13 +5,15 @@ using UnityEngine;
 public class CircleSpawner : MonoBehaviour
 {
     [SerializeField] GameObject circlePrefab;
-    private int numberOfParticipants = 5;   // TODO : 참여인원 수 받아오기
+    private int numberOfParticipants = 5;   
     LayerMask obstacleLayer; // 장애물로 삼을 레이어
     Vector3 boxSize = new Vector3(30f, 0.1f, 30f);
     [SerializeField] bool DebugMode;
+    List<GameObject> touchpoints = new List<GameObject>();
 
     void Start()
     {
+        //numberOfParticipants = int.Parse(UIManager.Instance.txtSelect.text);
         obstacleLayer = LayerMask.GetMask("Terrain", "Effect");
         SpawnCircles();
     }
@@ -34,7 +36,8 @@ public class CircleSpawner : MonoBehaviour
 
             if (colliders.Length == 0)
             {
-                Instantiate(circlePrefab, spawnPosition, Quaternion.identity);
+                GameObject circle = Instantiate(circlePrefab, spawnPosition, Quaternion.identity);
+                touchpoints.Add(circle);
             }
             else
             {
@@ -50,6 +53,8 @@ public class CircleSpawner : MonoBehaviour
                 i--;
             }
         }
+
+        GameManager.Instance.Touchpoints = touchpoints;
     }
 
     void OnDrawGizmos()
