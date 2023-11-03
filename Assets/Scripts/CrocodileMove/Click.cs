@@ -67,7 +67,10 @@ public class Click : MonoBehaviour
             }
             if (ShouldAttack)
             {
-                StartCoroutine(attack()); //공격 애니메이션 재생          
+                StartCoroutine(attack());
+                //공격 애니메이션 재생          
+                StartCoroutine(attackRotation());
+                //공격할때 x 축으로 -90도 회전
             }
         }
     }
@@ -78,5 +81,14 @@ public class Click : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         animator.SetBool("Attack", false);
+    }
+    IEnumerator attackRotation()
+    {
+        transform.Rotate(new Vector3(-90,0,0)*0.8f);
+        
+        yield return new WaitForSeconds(1.4f); // 1초대기
+
+        transform.Rotate(new Vector3(90, 0, 0) * 0.8f);
+
     }
 }
