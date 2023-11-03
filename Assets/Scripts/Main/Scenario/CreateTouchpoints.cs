@@ -5,13 +5,15 @@ using UnityEngine;
 public class CreateTouchpoints : ScenarioBase
 {
     [SerializeField] GameObject circlePrefab;
-    private int numberOfParticipants = 5;   // TODO : 참여인원 수 받아오기
+    private int numberOfParticipants = 5;
     LayerMask obstacleLayer; // 장애물로 삼을 레이어
     Vector3 boxSize = new Vector3(30f, 0.1f, 30f);
     [SerializeField] bool DebugMode;
+    List<GameObject> touchpoints = new List<GameObject>();
 
     public override void Enter(ScenarioController controller)
     {
+        numberOfParticipants = UIManager.Instance.value;
         obstacleLayer = LayerMask.GetMask("Terrain", "Effect");
         SpawnCircles();
         controller.SetNextScenario();
@@ -29,14 +31,14 @@ public class CreateTouchpoints : ScenarioBase
 
     void SpawnCircles()
     {
-        // 카메라 화면에 비치는 x position 범위 : -250f~150f
-        float screenWidth = 400f;
+        // 카메라 화면에 비치는 x position 범위 : -230f~130f
+        float screenWidth = 360f;
         float pieceWidth = screenWidth / numberOfParticipants;
 
         for (int i = 0; i < numberOfParticipants; i++)
         {
-            float randomX = Random.Range(-240f + i * pieceWidth, -240f + (i + 1) * pieceWidth);
-            float randomZ = Random.Range(-220f, -10f);
+            float randomX = Random.Range(-230f + i * pieceWidth, -230f + (i + 1) * pieceWidth);
+            float randomZ = Random.Range(-210f, -10f);
 
             Vector3 spawnPosition = new Vector3(randomX, 15f, randomZ);
 
@@ -45,7 +47,8 @@ public class CreateTouchpoints : ScenarioBase
 
             if (colliders.Length == 0)
             {
-                Instantiate(circlePrefab, spawnPosition, Quaternion.identity);
+                GameObject circle = Instantiate(circlePrefab, spawnPosition, Quaternion.identity);
+                touchpoints.Add(circle);
             }
             else
             {
@@ -61,14 +64,7 @@ public class CreateTouchpoints : ScenarioBase
                 i--;
             }
         }
-    }
 
-    void OnDrawGizmos()
-    {
-        /*
-        Gizmos.matrix = transform.localToWorldMatrix;
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(new Vector3(130, 15, -40), boxSize);
-        */
+        GameManager.Instance.Touchpoints = touchpoints;
     }
 }
