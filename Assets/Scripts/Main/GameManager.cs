@@ -5,8 +5,22 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
-
     public static GameManager Instance => instance;
+
+    private List<GameObject> touchpoints;
+    private int touchpointIndex;
+
+    public List<GameObject> Touchpoints
+    {
+        get { return touchpoints; }
+        set { touchpoints = value; }
+    }
+
+    public int TouchpointIndex
+    {
+        get { return touchpointIndex; }
+        set { touchpointIndex = value; }
+    }
 
     private void Awake()
     {

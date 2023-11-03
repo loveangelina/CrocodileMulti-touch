@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: StylizedWater_Mobile
   m_Shader: {fileID: 4800000, guid: 644d4419f6d30214892dd65158332ba7, type: 3}
-  m_ShaderKeywords: _ENABLEDEPTHTEXTURE_ON _NORMAL_MAP_ON _USEINTERSECTIONFOAM_ON
+  m_ShaderKeywords: _ENABLEDEPTHTEXTURE_ON _NORMAL_MAP_ON _UNLIT_ON _USEINTERSECTIONFOAM_ON
     _WORLDSPACETILIBG_ON
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
@@ -71,7 +71,7 @@ Material:
     - _FoamSpeed: 0.1
     - _FoamTiling: 0.15
     - _Fresnelexponent: 2.6
-    - _Glossiness: 1
+    - _Glossiness: 0.199
     - _HighlightPanning: 0
     - _LIGHTING: 0
     - _MACRO_WAVES: 0
@@ -84,7 +84,7 @@ Material:
     - _RT_REFRACTION: 0
     - _ReflectionFresnel: 2
     - _ReflectionRefraction: 0.006
-    - _ReflectionStrength: 1
+    - _ReflectionStrength: 0
     - _RefractionAmount: 0.057
     - _RimDistance: 0.899
     - _RimDistortion: 0.139
@@ -114,7 +114,7 @@ Material:
     - __dirty: 1
     m_Colors:
     - _FresnelColor: {r: 0.5, g: 0.8551724, b: 1, a: 0.084}
-    - _RimColor: {r: 1, g: 1, b: 1, a: 0.509}
+    - _RimColor: {r: 0, g: 0, b: 0, a: 0.509}
     - _WaterColor: {r: 0.1176471, g: 0.6348885, b: 1, a: 0}
     - _WaterShallowColor: {r: 0.41911757, g: 1, b: 0.8798174, a: 1}
     - _WaveDirection: {r: 1, g: 0, b: 0, a: 0}
