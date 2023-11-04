@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.25061142, g: 0.56194955, b: 0.72993, a: 1}
+  m_IndirectSpecularColor: {r: 0.25056708, g: 0.56171304, b: 0.72961843, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6637,13 +6637,8 @@ MonoBehaviour:
   - {fileID: 1554380870}
   - {fileID: 2067211617}
   - {fileID: 160750256}
-  destPos: {x: 0, y: 0, z: 0}
-  dir: {x: 0, y: 0, z: 0}
-  lookTarget: {x: 0, y: 0, z: 0, w: 0}
   IsTouch: 0
   IsMove: 0
-  mousePosition: {x: 0, y: 0, z: 0}
-  worldPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &766755661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6651,15 +6646,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 766755659}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8673f327850982143aa693dd0b80fc6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 40
+  upSpeed: 100
   rotateSpeed: 12
-  destinationPoint: {x: 0, y: 0, z: 0}
   waitTime: 2
+  upmove: {fileID: 0}
   ShoudMove: 0
   ShouldAttack: 0
 --- !u!4 &766755663 stripped
@@ -9473,7 +9469,7 @@ MonoBehaviour:
   scenarios:
   - {fileID: 400578008}
   - {fileID: 1934361937}
-  - {fileID: 2146644585}
+  - {fileID: 0}
   nextSceneName: 
 --- !u!4 &1105215821
 Transform:
@@ -13055,6 +13051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91bbabc79aadcd94eaf250e8beaf8732, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  touchpointIndex: 0
 --- !u!4 &1641946317
 Transform:
   m_ObjectHideFlags: 0
@@ -15746,8 +15743,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shaderNames:
+  - Desktop
   - Mobile
-  shaderIndex: 0
+  shaderIndex: 1
   shader: {fileID: 4800000, guid: 644d4419f6d30214892dd65158332ba7, type: 3}
   renderQueue: 3000
   enableVertexColors: 1
@@ -15891,7 +15889,7 @@ MonoBehaviour:
   currentCam: {fileID: 0}
   material: {fileID: 2100000, guid: f6317624d362488489be67462f09d002, type: 2}
   isMobileAdvanced: 1
-  isMobilePlatform: 1
+  isMobilePlatform: 0
   shaderName: StylizedWater/Mobile
   isWaterLayer: 1
   hasShaderParams: 1
@@ -16627,7 +16625,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2146644584}
-  - component: {fileID: 2146644585}
   m_Layer: 0
   m_Name: 02_SelectPunisher
   m_TagString: Untagged

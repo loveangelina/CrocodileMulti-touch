@@ -68,4 +68,5 @@ public class RandMove : MonoBehaviour
     {
         randomSpot = Random.Range(0, moveSpot.Length);
     }
+
 }
