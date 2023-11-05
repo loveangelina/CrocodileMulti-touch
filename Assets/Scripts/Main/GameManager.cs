@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance => instance;
 
     private List<GameObject> touchpoints;
-    public int touchpointIndex;
+    public int punisherIndex;
 
     public List<GameObject> Touchpoints
     {
@@ -16,10 +16,10 @@ public class GameManager : MonoBehaviour
         set { touchpoints = value; }
     }
 
-    public int TouchpointIndex
+    public int PunisherIndex
     {
-        get { return touchpointIndex; }
-        set { touchpointIndex = value; }
+        get { return punisherIndex; }
+        set { punisherIndex = value; }
     }
 
     private void Awake()
@@ -36,4 +36,22 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
+
+    public void ClearTouchpoints()
+    {
+        if(touchpoints != null)
+        {
+            // 터치포인트 게임 오브젝트 삭제
+            foreach(GameObject touchpoint in touchpoints)
+            {
+                Destroy(touchpoint);
+            }
+
+            // 카운트다운 UI 띄우는 것은 GameUIManager에서 해줌
+
+            // 터치포인트 리스트 초기화
+            touchpoints.Clear();
+        }
+    }
+
 }
