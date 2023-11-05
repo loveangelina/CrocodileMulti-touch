@@ -25,12 +25,17 @@ public class ScenarioController : MonoBehaviour
 		}
 	}
 
-	public void SetNextScenario()
+	public void SetNextScenario(int index = -5)
 	{
 		// 현재 시나리오의 Exit() 메소드 호출
 		if (currentScenario != null )
 		{
 			currentScenario.Exit();
+		}
+
+		if(index != -5)
+        {
+			currentIndex = index;
 		}
 
 		// 마지막 시나리오를 진행했다면 CompletedAllTutorials() 메소드 호출
