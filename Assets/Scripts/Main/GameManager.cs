@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance => instance;
 
     private List<GameObject> touchpoints;
-    private int touchpointIndex;
+    public int touchpointIndex;
 
     public List<GameObject> Touchpoints
     {
