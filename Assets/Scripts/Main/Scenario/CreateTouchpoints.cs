@@ -13,6 +13,9 @@ public class CreateTouchpoints : ScenarioBase
 
     public override void Enter(ScenarioController controller)
     {
+        // 터치포인트 초기화
+        GameManager.Instance.ClearTouchpoints();
+
         numberOfParticipants = UIManager.Instance.value;
         obstacleLayer = LayerMask.GetMask("Terrain", "Effect");
         SpawnCircles();
