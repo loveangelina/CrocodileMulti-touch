@@ -11,30 +11,24 @@ public class TouchScreen : MonoBehaviour
    [SerializeField] GameObject upmove;
     public bool ShouldMove = false;
     public bool ShouldAttack = false;
-    private MoveAround moveAround;
 
     Animator animator;
     ParticleSystem Swim;
     GameObject punisher;
 
-    // Start is called before the first frame update
     void Start()
     {
-        //moveAround = GetComponent<MoveAround>();
         animator = GetComponent<Animator>();
-        punisher =GameManager.Instance.Touchpoints[GameManager.Instance.TouchpointIndex];//패배자 선정
-        Debug.Log("벌칙자는 : " + punisher.transform.position);
+        punisher =GameManager.Instance.Touchpoints[GameManager.Instance.PunisherIndex];//패배자 선정
         Swim = GetComponentInChildren<ParticleSystem>();
         upmove = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //if (ShouldMove) // 움직임이 true 일때 실행
+        if (ShouldMove) // 움직임이 true 일때 실행
         {
-            //moveAround.IsAround = false;//랜덤이동금지
-                                        //수영 애니메이션 실행
+            //수영 애니메이션 실행
             animator.SetBool("Sprint", true);
             //공격 애니메이션 멈춤
             animator.SetBool("Attack", false);
@@ -53,11 +47,12 @@ public class TouchScreen : MonoBehaviour
                 animator.SetBool("Sprint", false);//이동 애니메이션 멈춤
                 ShouldAttack = true;//공격 가능              
             }
-            if (ShouldAttack)
-            {
-                StartCoroutine(attack());
-                //공격 애니메이션 재생                             
-            }
+        }
+        if (ShouldAttack)
+        {
+            ShouldAttack = false;
+            StartCoroutine(attack());
+            //공격 애니메이션 재생                             
         }
     }
     IEnumerator attack()
@@ -69,7 +64,7 @@ public class TouchScreen : MonoBehaviour
         yield return new WaitForSeconds(1.4f); // 1초대기
         animator.SetBool("Attack", false);
         transform.position = new Vector3(transform.position.x, 12, transform.position.z);
-        transform.Rotate(new Vector3(-90, 0, 0) * 0.8f);
+        transform.Rotate(new Vector3(90, 0, 0) * 0.8f);
         Swim.Play();
     }
 

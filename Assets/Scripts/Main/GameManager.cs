@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance => instance;
 
     private List<GameObject> touchpoints;
-    public int touchpointIndex;
+    public int punisherIndex;
 
     public List<GameObject> Touchpoints
     {
@@ -16,10 +16,10 @@ public class GameManager : MonoBehaviour
         set { touchpoints = value; }
     }
 
-    public int TouchpointIndex
+    public int PunisherIndex
     {
-        get { return touchpointIndex; }
-        set { touchpointIndex = value; }
+        get { return punisherIndex; }
+        set { punisherIndex = value; }
     }
 
     private void Awake()
