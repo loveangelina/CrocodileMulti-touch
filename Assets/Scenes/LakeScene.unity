@@ -723,7 +723,7 @@ GameObject:
   m_Component:
   - component: {fileID: 56779163}
   m_Layer: 0
-  m_Name: MoveSpot
+  m_Name: MoveSpots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5930,7 +5930,7 @@ MonoBehaviour:
   rotate: 2
   attackRotate: 0.5
   respon: 5
-  moveSpot:
+  moveSpots:
   - {fileID: 1900695128}
   - {fileID: 805782696}
   - {fileID: 823147460}
@@ -5939,8 +5939,6 @@ MonoBehaviour:
   - {fileID: 1554380870}
   - {fileID: 2067211617}
   - {fileID: 160750256}
-  IsTouch: 0
-  IsMove: 0
 --- !u!114 &766755661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9153,6 +9151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6393324bc26c8b24e85601497ef9ceb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveTime: 10
 --- !u!1001 &1141275941
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16342,8 +16341,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitTime: 0
   startWaitTime: 0
-  IsAround: 0
-  AroundSpeed: 40
+  AroundSpeed: 30
   AroundAngleSpeed: 2
 --- !u!4 &948482793393660491
 Transform:
