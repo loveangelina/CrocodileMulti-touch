@@ -69,7 +69,7 @@ public class TouchScreen : MonoBehaviour
         yield return new WaitForSeconds(1.4f); // 1√ ¥Î±‚
         animator.SetBool("Attack", false);
         transform.position = new Vector3(transform.position.x, 12, transform.position.z);
-        transform.Rotate(new Vector3(-90, 0, 0) * 0.8f);
+        transform.Rotate(new Vector3(90, 0, 0) * 0.8f);
         Swim.Play();
     }
 

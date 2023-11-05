@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
         set { touchpoints = value; }
     }
 
-    public int TouchpointIndex
+    public int TouchpointIndex 
     {
         get { return touchpointIndex; }
         set { touchpointIndex = value; }
@@ -39,10 +39,10 @@ public class GameManager : MonoBehaviour
 
     public void ClearTouchpoints()
     {
-        if(touchpoints != null)
+        if (touchpoints != null)
         {
             // 터치포인트 게임 오브젝트 삭제
-            foreach(GameObject touchpoint in touchpoints)
+            foreach (GameObject touchpoint in touchpoints)
             {
                 Destroy(touchpoint);
             }
@@ -53,5 +53,6 @@ public class GameManager : MonoBehaviour
             touchpoints.Clear();
         }
     }
+
 
 }

@@ -18,7 +18,7 @@ public class MoveAround : MonoBehaviour
         waitTime = startWaitTime;
         animator = GetComponent<Animator>();
         randMove = GetComponent<RandMove>();
-        GameManager.Instance.touchpointIndex = Random.Range(0, GameManager.Instance.touchpointIndex);
+        GameManager.Instance.touchpointIndex = Random.Range(0, GameManager.Instance.Touchpoints.Count);
     }
 
     // Update is called once per frame
@@ -28,7 +28,6 @@ public class MoveAround : MonoBehaviour
        if (IsAround)//주위를 돌고 있을때
         {
             randMove.IsTouch = true;
-            MakingAroundSpot();//터치포인트 리스트의 인덱스값 랜덤설정
             AroundMove();//회전과 움직임
             animator.SetBool("Sprint", true);
             if (Vector3.Distance(transform.position, GameManager.Instance.Touchpoints[GameManager.Instance.touchpointIndex].GetComponent<Transform>().position) < 0.2f)
@@ -50,7 +49,7 @@ public class MoveAround : MonoBehaviour
     }
     public void MakingAroundSpot()
     {
-        GameManager.Instance.touchpointIndex = Random.Range(0, GameManager.Instance.touchpointIndex); //터치포인트 리스트의 인덱스값 랜덤설정
+        GameManager.Instance.touchpointIndex = Random.Range(0, GameManager.Instance.Touchpoints.Count); //터치포인트 리스트의 인덱스값 랜덤설정
     }
     public void AroundMove()
     {

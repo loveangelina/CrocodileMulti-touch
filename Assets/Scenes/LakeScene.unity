@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.25056708, g: 0.56171304, b: 0.72961843, a: 1}
+  m_IndirectSpecularColor: {r: 0.25061142, g: 0.56194955, b: 0.72993, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6574,12 +6574,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 766755659}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 892e836a5807f974fac0e575fd5c8387, type: 3}
+  m_Script: {fileID: 11500000, guid: d915ba0998002c649a78cf029d64dbdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 40
   waitTime: 0
-  startWaitTime: 0.1
+  startWaitTime: 0
   rotate: 2
   attackRotate: 0.5
   respon: 5
@@ -6594,25 +6594,7 @@ MonoBehaviour:
   - {fileID: 160750256}
   IsTouch: 0
   IsMove: 0
---- !u!114 &766755661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 766755659}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8673f327850982143aa693dd0b80fc6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 40
-  upSpeed: 100
-  rotateSpeed: 12
-  waitTime: 2
-  upmove: {fileID: 0}
-  ShouldMove: 0
-  ShouldAttack: 0
+  IsMoving: 0
 --- !u!4 &766755663 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 37587f7fd4d749845bd8ad2748c194a3, type: 3}
@@ -15593,8 +15575,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shaderNames:
+  - Desktop
   - Mobile
-  shaderIndex: 0
+  shaderIndex: 1
   shader: {fileID: 4800000, guid: 644d4419f6d30214892dd65158332ba7, type: 3}
   renderQueue: 3000
   enableVertexColors: 1
@@ -15735,10 +15718,10 @@ MonoBehaviour:
   lightingMethod: 1
   enableShadows: 1
   shadowCaster: {fileID: 1628943269}
-  currentCam: {fileID: 813950201}
+  currentCam: {fileID: 0}
   material: {fileID: 2100000, guid: f6317624d362488489be67462f09d002, type: 2}
   isMobileAdvanced: 1
-  isMobilePlatform: 1
+  isMobilePlatform: 0
   shaderName: StylizedWater/Mobile
   isWaterLayer: 1
   hasShaderParams: 1
