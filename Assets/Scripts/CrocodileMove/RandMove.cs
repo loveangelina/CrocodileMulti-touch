@@ -15,49 +15,39 @@ public class RandMove : MonoBehaviour
    [SerializeField] float respon = 5f;
    [SerializeField] Transform[] moveSpot;
    int randomSpot;
-   public bool IsTouch;
-   public bool IsMove;
    Animator animator;
+
     private void Start()
     {
         waitTime = startWaitTime;
         randomSpot = Random.Range(0, moveSpot.Length);
         animator = GetComponent<Animator>();
-        IsTouch = false;
-        IsMove = false;
     }
+
     private void Update()
     {
+        Move(); //움직임 활성화
+        animator.SetBool("Sprint", true); // 애니메이션 움직임 활성화
 
-        if (!IsTouch) //터치안할때
+        if (Vector3.Distance(transform.position, moveSpot[randomSpot].position) <= 0.2f) // 무브스팟과의 거리가 0.1f 보다 가까워지면
         {
-            if (!IsMove)//움직이지 않을때
-            {
-                Move(); //움직임 활성화
-                animator.SetBool("Sprint", true); // 애니메이션 움직임 활성화
-
-                if (Vector3.Distance(transform.position, moveSpot[randomSpot].position) <= 0.2f) // 무브스팟과의 거리가 0.1f 보다 가까워지면
-                {
-                    //시간을감소, 웨이트 타임이 0보다 작아지면 다시 무빙상태 (그전은 아이들 상태)                  
-                    if (waitTime <= 0)
-                    {                       
-                        randomSpotMaking();//랜덤으로 가야할곳 설정
-                        //IsMove = false; //움직임 활성화
-                        waitTime = Random.Range(0, 2f);                      
-                        startWaitTime = waitTime;
-                    }
-                    else
-                    {                       
-                        animator.SetBool("Sprint", false);
-                        waitTime -= Time.deltaTime;
-                    }
-                }               
-            }          
-        }
+            //시간을감소, 웨이트 타임이 0보다 작아지면 다시 무빙상태 (그전은 아이들 상태)                  
+            if (waitTime <= 0)
+            {                       
+                randomSpotMaking();//랜덤으로 가야할곳 설정
+                //IsMove = false; //움직임 활성화
+                waitTime = Random.Range(0, 2f);                      
+                startWaitTime = waitTime;
+            }
+            else
+            {                       
+                animator.SetBool("Sprint", false);
+                waitTime -= Time.deltaTime;
+            }
+        }               
     }
     private void Move() //움직임과 회전을 함
     {
-        IsMove = false;
         transform.position = Vector3.MoveTowards(transform.position, moveSpot[randomSpot].position, speed * Time.deltaTime);
         Vector3 dir = moveSpot[randomSpot].position - transform.position;
         Quaternion targetAngle = Quaternion.LookRotation(dir);

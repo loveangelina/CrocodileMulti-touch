@@ -11,8 +11,8 @@ public class SelectPunisher : ScenarioBase
         List<GameObject> touchpoints = GameManager.Instance.Touchpoints;
 
         int randomIndex = Random.Range(0, numberOfParticipants);
-        GameManager.Instance.TouchpointIndex = randomIndex;
-        Debug.Log("¹úÄ¢ÀÚ ÀÎµ¦½º : " + GameManager.Instance.TouchpointIndex);
+        GameManager.Instance.PunisherIndex = randomIndex;
+        Debug.Log("¹úÄ¢ÀÚ ÀÎµ¦½º : " + GameManager.Instance.PunisherIndex);
 
         Vector3 selectedPosition = touchpoints[randomIndex].transform.position;
         Debug.Log("¼±ÅÃµÈ À§Ä¡ : " + selectedPosition);
