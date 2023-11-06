@@ -2,76 +2,59 @@ using UnityEngine;
 
 public class RandMove : MonoBehaviour
 {
-    [SerializeField] float speed;
-    [SerializeField] float waitTime;
-    [SerializeField] float startWaitTime;
-    [SerializeField] float rotate = 0.5f;
-    [SerializeField] float attackRotate = 0.5f;
-    [SerializeField] float respon = 5f;
-    [SerializeField] Transform[] moveSpot;
-    int randomSpot;
-    public bool IsTouch;
-    public bool IsMove;
-    public bool IsMoving;
-    Animator animator;
+   [SerializeField] float speed;
+   [SerializeField] float waitTime;
+   [SerializeField] float startWaitTime;
+   [SerializeField] float rotate = 0.5f;
+   [SerializeField] float attackRotate = 0.5f;
+   [SerializeField] float respon = 5f;
+   [SerializeField] Transform[] moveSpots;
+   int randomSpot;
+   Animator animator;
+
     private void Start()
     {
         waitTime = startWaitTime;
-        randomSpot = Random.Range(0, moveSpot.Length);
+        randomSpotMaking();
         animator = GetComponent<Animator>();
-        IsTouch = false;
-        IsMove = false;
-        IsMoving = true;
     }
+
     private void Update()
     {
+        Move(); //ì›€ì§ì„ í™œì„±í™”
+        animator.SetBool("Sprint", true); // ì• ë‹ˆë©”ì´ì…˜ ì›€ì§ì„ í™œì„±í™”
 
-        if (!IsTouch) //ÅÍÄ¡¾ÈÇÒ¶§
+        if (Vector3.Distance(transform.position, moveSpots[randomSpot].position) <= 0.2f) // ë¬´ë¸ŒìŠ¤íŒŸê³¼ì˜ ê±°ë¦¬ê°€ 0.1f ë³´ë‹¤ ê°€ê¹Œì›Œì§€ë©´
         {
-            
-            if(IsMoving)
-            {
-                Move(); //¿òÁ÷ÀÓ È°¼ºÈ­
-                animator.SetBool("Sprint", true); // ¾Ö´Ï¸ŞÀÌ¼Ç ¿òÁ÷ÀÓ È°¼ºÈ­
+            //ì‹œê°„ì„ê°ì†Œ, ì›¨ì´íŠ¸ íƒ€ì„ì´ 0ë³´ë‹¤ ì‘ì•„ì§€ë©´ ë‹¤ì‹œ ë¬´ë¹™ìƒíƒœ (ê·¸ì „ì€ ì•„ì´ë“¤ ìƒíƒœ)                  
+            if (waitTime <= 0)
+            {                       
+                randomSpotMaking();//ëœë¤ìœ¼ë¡œ ê°€ì•¼í• ê³³ ì„¤ì •
+                //IsMove = false; //ì›€ì§ì„ í™œì„±í™”
+                waitTime = Random.Range(0, 2f);                      
+                startWaitTime = waitTime;
             }
-                
-            
-
-            if (Vector3.Distance(transform.position, moveSpot[randomSpot].position) <= 0.2f) // ¹«ºê½ºÆÌ°úÀÇ °Å¸®°¡ 0.1f º¸´Ù °¡±î¿öÁö¸é
-            {
-                //½Ã°£À»°¨¼Ò, ¿şÀÌÆ® Å¸ÀÓÀÌ 0º¸´Ù ÀÛ¾ÆÁö¸é ´Ù½Ã ¹«ºù»óÅÂ (±×ÀüÀº ¾ÆÀÌµé »óÅÂ)                  
-                if (waitTime <= 0)
-                {
-                    randomSpotMaking();//·£´ıÀ¸·Î °¡¾ßÇÒ°÷ ¼³Á¤
-                    IsMoving = true; //¿òÁ÷ÀÓ È°¼ºÈ­
-                    waitTime = Random.Range(0, 2f);
-                    startWaitTime = waitTime;
-                }
-                else
-                {
-                    IsMoving = false;
-                    animator.SetBool("Sprint", false);
-                    waitTime -= Time.deltaTime;
-                }
+            else
+            {                       
+                animator.SetBool("Sprint", false);
+                waitTime -= Time.deltaTime;
             }
-            
+        }               
+    }
+    private void Move() //ì›€ì§ì„ê³¼ íšŒì „ì„ í•¨
+    {
+        transform.position = Vector3.MoveTowards(transform.position, moveSpots[randomSpot].position, speed * Time.deltaTime);
+        Vector3 dir = moveSpots[randomSpot].position - transform.position;
+        if(dir != Vector3.zero)
+        {
+            Quaternion targetAngle = Quaternion.LookRotation(dir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetAngle, rotate * Time.deltaTime);
         }
     }
-    private void Move() //¿òÁ÷ÀÓ°ú È¸ÀüÀ» ÇÔ
-    {
-        IsMove = false;
-        transform.position = Vector3.MoveTowards(transform.position, moveSpot[randomSpot].position, speed * Time.deltaTime);
-        Vector3 dir = moveSpot[randomSpot].position - transform.position;
-        Quaternion targetAngle = Quaternion.LookRotation(dir);
-        
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetAngle, rotate * Time.deltaTime);
 
-        
-        
-    }
-    private void randomSpotMaking() // ·£´ıÇÑ À§Ä¡ »ı¼º
+    private void randomSpotMaking() // ëœë¤í•œ ìœ„ì¹˜ ìƒì„±
     {
-        randomSpot = Random.Range(0, moveSpot.Length);
+        randomSpot = Random.Range(0, moveSpots.Length);
     }
 
 }

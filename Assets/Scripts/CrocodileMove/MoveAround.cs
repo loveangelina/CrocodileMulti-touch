@@ -6,61 +6,56 @@ public class MoveAround : MonoBehaviour
 {
     [SerializeField] float waitTime;
     [SerializeField] float startWaitTime;
-    public bool IsAround;
     [SerializeField] float AroundSpeed = 10f;
     [SerializeField] float AroundAngleSpeed = 0.5f;
     Vector3 target;
     Animator animator;
-    RandMove randMove;
-    // Start is called before the first frame update
+    int randomPositionIndex;
+
     void Start()
     {
         waitTime = startWaitTime;
         animator = GetComponent<Animator>();
-        randMove = GetComponent<RandMove>();
-        GameManager.Instance.touchpointIndex = Random.Range(0, GameManager.Instance.Touchpoints.Count);
+        MakingAroundSpot();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
-       if (IsAround)//ÁÖÀ§¸¦ µ¹°í ÀÖÀ»¶§
+        AroundMove();//íšŒì „ê³¼ ì›€ì§ì„
+        animator.SetBool("Sprint", true);
+        float dis = Vector3.Distance(transform.position, GameManager.Instance.Touchpoints[randomPositionIndex].transform.position);
+        if (dis < 0.2f)
         {
-            randMove.IsTouch = true;
-            AroundMove();//È¸Àü°ú ¿òÁ÷ÀÓ
-            animator.SetBool("Sprint", true);
-            if (Vector3.Distance(transform.position, GameManager.Instance.Touchpoints[GameManager.Instance.touchpointIndex].GetComponent<Transform>().position) < 0.2f)
-            {                
-                if (waitTime <= 0)
-                {
-                    MakingAroundSpot();//·£´ıÀ¸·Î °¡¾ßÇÒ°÷ ¼³Á¤
-                    IsAround = true; //¿òÁ÷ÀÓ È°¼ºÈ­
-                    waitTime = Random.Range(0, 2f);
-                    startWaitTime = waitTime;
-                }
-                else
-                { 
-                    animator.SetBool("Sprint", false);
-                    waitTime -= Time.deltaTime;
-                }
+            if (waitTime <= 0)
+            {
+                MakingAroundSpot();//ëœë¤ìœ¼ë¡œ ê°€ì•¼í• ê³³ ì„¤ì •
+                waitTime = Random.Range(0, 2f);
+                startWaitTime = waitTime;
+            }
+            else
+            {
+                animator.SetBool("Sprint", false);
+                waitTime -= Time.deltaTime;
             }
         }
     }
+
     public void MakingAroundSpot()
     {
-        GameManager.Instance.touchpointIndex = Random.Range(0, GameManager.Instance.Touchpoints.Count); //ÅÍÄ¡Æ÷ÀÎÆ® ¸®½ºÆ®ÀÇ ÀÎµ¦½º°ª ·£´ı¼³Á¤
+        Debug.Log("ëœë¤í¬ì¸íŠ¸ ìœ„ì¹˜ : " + randomPositionIndex);
+        randomPositionIndex = Random.Range(0, GameManager.Instance.Touchpoints.Count); //í„°ì¹˜í¬ì¸íŠ¸ ë¦¬ìŠ¤íŠ¸ì˜ ì¸ë±ìŠ¤ê°’ ëœë¤ì„¤ì •
     }
+
     public void AroundMove()
     {
-        target = GameManager.Instance.Touchpoints[GameManager.Instance.touchpointIndex].GetComponent<Transform>().position - transform.position;
-        //·£´ıÇÑ ÅÍÄ¡Æ÷ÀÎÆ®¸¦ ÇâÇÑ ¹æÇâº¤ÅÍ
+        target = GameManager.Instance.Touchpoints[randomPositionIndex].GetComponent<Transform>().position - transform.position;
+        //ëœë¤í•œ í„°ì¹˜í¬ì¸íŠ¸ë¥¼ í–¥í•œ ë°©í–¥ë²¡í„°
 
-        //ÅÍÄ¡Æ÷ÀÎÆ® ·£´ıÇÏ°Ô µ¹±â
-        transform.position = Vector3.MoveTowards(transform.position, GameManager.Instance.Touchpoints[GameManager.Instance.touchpointIndex].GetComponent<Transform>().position,
-        AroundSpeed * Time.deltaTime); //·£´ıÇÑ ÅÍÄ¡Æ÷ÀÎÆ®·Î ÀÌµ¿
+        //í„°ì¹˜í¬ì¸íŠ¸ ëœë¤í•˜ê²Œ ëŒê¸°
+        transform.position = Vector3.MoveTowards(transform.position, GameManager.Instance.Touchpoints[randomPositionIndex].GetComponent<Transform>().position,
+        AroundSpeed * Time.deltaTime); //ëœë¤í•œ í„°ì¹˜í¬ì¸íŠ¸ë¡œ ì´ë™
 
-        //ÅÍÄ¡Æ÷ÀÎÆ®¸¦ ÇâÇØ È¸Àü
+        //í„°ì¹˜í¬ì¸íŠ¸ë¥¼ í–¥í•´ íšŒì „
         Quaternion AroundAngle = Quaternion.LookRotation(target);
         transform.rotation = Quaternion.Slerp(transform.rotation, AroundAngle, AroundAngleSpeed * Time.deltaTime);
     }

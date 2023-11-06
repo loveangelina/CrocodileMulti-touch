@@ -40,12 +40,4 @@ public class upMove : MonoBehaviour
         transform.Rotate(new Vector3(90, 0, 0) * 0.8f);
 
     }
-    void OnAttackReady()
-    {
-        animator.SetFloat("AttackSpeed", 1.5f);
-    }
-    void OnAttack()
-    {
-        animator.SetFloat("AttackSpeed", 2f);
-    }
 }

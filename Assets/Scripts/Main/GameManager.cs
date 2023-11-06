@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance => instance;
 
     private List<GameObject> touchpoints;
-    public int touchpointIndex;
+    public int punisherIndex;
 
     public List<GameObject> Touchpoints
     {
@@ -16,22 +16,22 @@ public class GameManager : MonoBehaviour
         set { touchpoints = value; }
     }
 
-    public int TouchpointIndex 
+    public int PunisherIndex
     {
-        get { return touchpointIndex; }
-        set { touchpointIndex = value; }
+        get { return punisherIndex; }
+        set { punisherIndex = value; }
     }
 
     private void Awake()
     {
-        // ÀÎ½ºÅÏ½º°¡ ÀÌ¹Ì Á¸ÀçÇÏ´Â °æ¿ì, »õ·Î »ı±â´Â ÀÎ½ºÅÏ½º »èÁ¦
+        // ì¸ìŠ¤í„´ìŠ¤ê°€ ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ê²½ìš°, ìƒˆë¡œ ìƒê¸°ëŠ” ì¸ìŠ¤í„´ìŠ¤ ì‚­ì œ
         if (instance)
         {
             Destroy(this.gameObject);
             return;
         }
 
-        // ÀÎ½ºÅÏ½º¸¦ À¯ÀÏ ¿ÀºêÁ§Æ®·Î ¸¸µê
+        // ì¸ìŠ¤í„´ìŠ¤ë¥¼ ìœ ì¼ ì˜¤ë¸Œì íŠ¸ë¡œ ë§Œë“¦
         instance = this;
 
         DontDestroyOnLoad(gameObject);
@@ -41,15 +41,15 @@ public class GameManager : MonoBehaviour
     {
         if (touchpoints != null)
         {
-            // ÅÍÄ¡Æ÷ÀÎÆ® °ÔÀÓ ¿ÀºêÁ§Æ® »èÁ¦
+            // í„°ì¹˜í¬ì¸íŠ¸ ê²Œì„ ì˜¤ë¸Œì íŠ¸ ì‚­ì œ
             foreach (GameObject touchpoint in touchpoints)
             {
                 Destroy(touchpoint);
             }
 
-            // Ä«¿îÆ®´Ù¿î UI ¶ç¿ì´Â °ÍÀº GameUIManager¿¡¼­ ÇØÁÜ
+            // ì¹´ìš´íŠ¸ë‹¤ìš´ UI ë„ìš°ëŠ” ê²ƒì€ GameUIManagerì—ì„œ í•´ì¤Œ
 
-            // ÅÍÄ¡Æ÷ÀÎÆ® ¸®½ºÆ® ÃÊ±âÈ­
+            // í„°ì¹˜í¬ì¸íŠ¸ ë¦¬ìŠ¤íŠ¸ ì´ˆê¸°í™”
             touchpoints.Clear();
         }
     }
