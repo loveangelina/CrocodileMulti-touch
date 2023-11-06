@@ -21,14 +21,14 @@ public class MoveAround : MonoBehaviour
 
     void Update()
     {
-        AroundMove();//È¸Àü°ú ¿òÁ÷ÀÓ
+        AroundMove();//íšŒì „ê³¼ ì›€ì§ì„
         animator.SetBool("Sprint", true);
         float dis = Vector3.Distance(transform.position, GameManager.Instance.Touchpoints[randomPositionIndex].transform.position);
         if (dis < 0.2f)
         {
             if (waitTime <= 0)
             {
-                MakingAroundSpot();//·£´ıÀ¸·Î °¡¾ßÇÒ°÷ ¼³Á¤
+                MakingAroundSpot();//ëœë¤ìœ¼ë¡œ ê°€ì•¼í• ê³³ ì„¤ì •
                 waitTime = Random.Range(0, 2f);
                 startWaitTime = waitTime;
             }
@@ -42,20 +42,20 @@ public class MoveAround : MonoBehaviour
 
     public void MakingAroundSpot()
     {
-        Debug.Log("·£´ıÆ÷ÀÎÆ® À§Ä¡ : " + randomPositionIndex);
-        randomPositionIndex = Random.Range(0, GameManager.Instance.Touchpoints.Count); //ÅÍÄ¡Æ÷ÀÎÆ® ¸®½ºÆ®ÀÇ ÀÎµ¦½º°ª ·£´ı¼³Á¤
+        Debug.Log("ëœë¤í¬ì¸íŠ¸ ìœ„ì¹˜ : " + randomPositionIndex);
+        randomPositionIndex = Random.Range(0, GameManager.Instance.Touchpoints.Count); //í„°ì¹˜í¬ì¸íŠ¸ ë¦¬ìŠ¤íŠ¸ì˜ ì¸ë±ìŠ¤ê°’ ëœë¤ì„¤ì •
     }
 
     public void AroundMove()
     {
         target = GameManager.Instance.Touchpoints[randomPositionIndex].GetComponent<Transform>().position - transform.position;
-        //·£´ıÇÑ ÅÍÄ¡Æ÷ÀÎÆ®¸¦ ÇâÇÑ ¹æÇâº¤ÅÍ
+        //ëœë¤í•œ í„°ì¹˜í¬ì¸íŠ¸ë¥¼ í–¥í•œ ë°©í–¥ë²¡í„°
 
-        //ÅÍÄ¡Æ÷ÀÎÆ® ·£´ıÇÏ°Ô µ¹±â
+        //í„°ì¹˜í¬ì¸íŠ¸ ëœë¤í•˜ê²Œ ëŒê¸°
         transform.position = Vector3.MoveTowards(transform.position, GameManager.Instance.Touchpoints[randomPositionIndex].GetComponent<Transform>().position,
-        AroundSpeed * Time.deltaTime); //·£´ıÇÑ ÅÍÄ¡Æ÷ÀÎÆ®·Î ÀÌµ¿
+        AroundSpeed * Time.deltaTime); //ëœë¤í•œ í„°ì¹˜í¬ì¸íŠ¸ë¡œ ì´ë™
 
-        //ÅÍÄ¡Æ÷ÀÎÆ®¸¦ ÇâÇØ È¸Àü
+        //í„°ì¹˜í¬ì¸íŠ¸ë¥¼ í–¥í•´ íšŒì „
         Quaternion AroundAngle = Quaternion.LookRotation(target);
         transform.rotation = Quaternion.Slerp(transform.rotation, AroundAngle, AroundAngleSpeed * Time.deltaTime);
     }

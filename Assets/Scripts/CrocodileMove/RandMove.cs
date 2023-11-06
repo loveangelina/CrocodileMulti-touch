@@ -1,8 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-
 using UnityEngine;
 
 public class RandMove : MonoBehaviour
@@ -26,16 +21,16 @@ public class RandMove : MonoBehaviour
 
     private void Update()
     {
-        Move(); //¿òÁ÷ÀÓ È°¼ºÈ­
-        animator.SetBool("Sprint", true); // ¾Ö´Ï¸ŞÀÌ¼Ç ¿òÁ÷ÀÓ È°¼ºÈ­
+        Move(); //ì›€ì§ì„ í™œì„±í™”
+        animator.SetBool("Sprint", true); // ì• ë‹ˆë©”ì´ì…˜ ì›€ì§ì„ í™œì„±í™”
 
-        if (Vector3.Distance(transform.position, moveSpots[randomSpot].position) <= 0.2f) // ¹«ºê½ºÆÌ°úÀÇ °Å¸®°¡ 0.1f º¸´Ù °¡±î¿öÁö¸é
+        if (Vector3.Distance(transform.position, moveSpots[randomSpot].position) <= 0.2f) // ë¬´ë¸ŒìŠ¤íŒŸê³¼ì˜ ê±°ë¦¬ê°€ 0.1f ë³´ë‹¤ ê°€ê¹Œì›Œì§€ë©´
         {
-            //½Ã°£À»°¨¼Ò, ¿şÀÌÆ® Å¸ÀÓÀÌ 0º¸´Ù ÀÛ¾ÆÁö¸é ´Ù½Ã ¹«ºù»óÅÂ (±×ÀüÀº ¾ÆÀÌµé »óÅÂ)                  
+            //ì‹œê°„ì„ê°ì†Œ, ì›¨ì´íŠ¸ íƒ€ì„ì´ 0ë³´ë‹¤ ì‘ì•„ì§€ë©´ ë‹¤ì‹œ ë¬´ë¹™ìƒíƒœ (ê·¸ì „ì€ ì•„ì´ë“¤ ìƒíƒœ)                  
             if (waitTime <= 0)
             {                       
-                randomSpotMaking();//·£´ıÀ¸·Î °¡¾ßÇÒ°÷ ¼³Á¤
-                //IsMove = false; //¿òÁ÷ÀÓ È°¼ºÈ­
+                randomSpotMaking();//ëœë¤ìœ¼ë¡œ ê°€ì•¼í• ê³³ ì„¤ì •
+                //IsMove = false; //ì›€ì§ì„ í™œì„±í™”
                 waitTime = Random.Range(0, 2f);                      
                 startWaitTime = waitTime;
             }
@@ -46,7 +41,7 @@ public class RandMove : MonoBehaviour
             }
         }               
     }
-    private void Move() //¿òÁ÷ÀÓ°ú È¸ÀüÀ» ÇÔ
+    private void Move() //ì›€ì§ì„ê³¼ íšŒì „ì„ í•¨
     {
         transform.position = Vector3.MoveTowards(transform.position, moveSpots[randomSpot].position, speed * Time.deltaTime);
         Vector3 dir = moveSpots[randomSpot].position - transform.position;
@@ -57,7 +52,7 @@ public class RandMove : MonoBehaviour
         }
     }
 
-    private void randomSpotMaking() // ·£´ıÇÑ À§Ä¡ »ı¼º
+    private void randomSpotMaking() // ëœë¤í•œ ìœ„ì¹˜ ìƒì„±
     {
         randomSpot = Random.Range(0, moveSpots.Length);
     }
