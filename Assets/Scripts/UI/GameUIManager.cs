@@ -16,11 +16,11 @@ public class GameUIManager : MonoBehaviour
 
     private void Start()
     {
-        txtGameStart.gameObject.SetActive(true);
-        StartCoroutine(Countdown());
+        //txtGameStart.gameObject.SetActive(true);
+        //StartCoroutine(Countdown());
  
     }
-    private void Update()
+    /*private void Update()
     {
         //TouchAgain 함수 잘 작동하는지 테스트용
         if(Input.GetKeyDown(KeyCode.Space))
@@ -28,7 +28,7 @@ public class GameUIManager : MonoBehaviour
             TocuhAgain();
             
         }
-    }
+    }*/
 
 
     public IEnumerator Countdown()
