@@ -5919,7 +5919,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149202909566}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d915ba0998002c649a78cf029d64dbdd, type: 3}
   m_Name: 
@@ -5939,25 +5939,6 @@ MonoBehaviour:
   - {fileID: 1554380870}
   - {fileID: 2067211617}
   - {fileID: 160750256}
---- !u!114 &766755661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132149202909566}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8673f327850982143aa693dd0b80fc6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 40
-  upSpeed: 100
-  rotateSpeed: 12
-  waitTime: 2
-  upmove: {fileID: 0}
-  ShouldMove: 0
-  ShouldAttack: 0
 --- !u!1001 &771050083
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15933,7 +15914,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149202909566}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -31.8, y: 12.16, z: -101.1}
+  m_LocalPosition: {x: 12.07, y: 12.16, z: -62.8}
   m_LocalScale: {x: 15, y: 10, z: 10}
   m_Children:
   - {fileID: 7616818731724291723}
@@ -16320,7 +16301,7 @@ GameObject:
   - component: {fileID: 5866666021865978302}
   - component: {fileID: 766755660}
   - component: {fileID: 919132149202909567}
-  - component: {fileID: 766755661}
+  - component: {fileID: 919132149202909568}
   m_Layer: 0
   m_Name: Crocodile PolyArt
   m_TagString: Untagged
@@ -16344,6 +16325,23 @@ MonoBehaviour:
   startWaitTime: 0
   AroundSpeed: 30
   AroundAngleSpeed: 2
+--- !u!114 &919132149202909568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149202909566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27a48e20c264cfe4c842a966b969b10e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upmove: {fileID: 0}
+  StopMove:
+    m_PersistentCalls:
+      m_Calls: []
+  maxY: 130
 --- !u!4 &948482793393660491
 Transform:
   m_ObjectHideFlags: 0
