@@ -8,7 +8,7 @@ public class GameUIManager : MonoBehaviour
 
     public GameObject pnlTouchAgain;
     public Text txtGameStart;
-    public Button testbtn;
+    public GameObject pnlBittenPay;
 
     //게임씬 카운트다운 변수
     float countdownTime = 5f;
@@ -68,6 +68,11 @@ public class GameUIManager : MonoBehaviour
     public void DeActivePnl()
     {
         pnlTouchAgain.gameObject.SetActive(false);
+    }
+
+    public void BittenPay()
+    {
+        pnlBittenPay.gameObject.SetActive(true);
     }
 
 }
