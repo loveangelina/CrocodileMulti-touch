@@ -17,14 +17,22 @@ public class CheckNumberOfTouchpoints : ScenarioBase
 
     private Dictionary<GameObject, bool> touchPoints = new Dictionary<GameObject, bool>();
 
+    private float timer = 5f; // 시간 제한 설정 (5초)
+
+    GameUIManager gameUIManager;
+
     public override void Enter(ScenarioController controller)
     {
         touchpointsLayer = LayerMask.GetMask("Effect");
         InitializeDictionary();
 
+        gameUIManager = FindObjectOfType<GameUIManager>();
+
         // 화면 크기 및 해상도 계산
         screenWidth = Screen.width;
         screenHeight = Screen.height;
+
+        StartCoroutine(StartTimer(controller));
     }
 
     public override void Execute(ScenarioController controller)
@@ -45,7 +53,7 @@ public class CheckNumberOfTouchpoints : ScenarioBase
             }
 
             // 입력된 터치 개수가 참여인원 수와 같으면
-            if (Input.touchCount == 5)
+            if (Input.touchCount == UIManager.Instance.value)
             {
                 if (debugMode)
                 {
@@ -55,7 +63,7 @@ public class CheckNumberOfTouchpoints : ScenarioBase
                 if (AreAllCirclesTouched())
                 {
                     Debug.Log("벌칙자 선정 단계로 넘어감");
-                    // TODO : setNext();
+                    controller.SetNextScenario();
                 }
             }
         }
@@ -130,6 +138,22 @@ public class CheckNumberOfTouchpoints : ScenarioBase
             }
         }
         return true;
+    }
+
+    IEnumerator StartTimer(ScenarioController controller)
+    {
+        yield return new WaitForSeconds(timer);
+
+        // 시간 내에 모든 터치포인트가 클릭되지 않았을 때
+        if (!AreAllCirclesTouched())
+        {
+            // 오류 메세지 UI 띄우고 카운트다운 UI 띄움
+            gameUIManager.TocuhAgain();
+            yield return new WaitForSeconds(2f);
+
+            controller.SetNextScenario(-1);
+            Debug.Log("터치포인트 재생성");
+        }
     }
 
     void InitializeDictionary()
