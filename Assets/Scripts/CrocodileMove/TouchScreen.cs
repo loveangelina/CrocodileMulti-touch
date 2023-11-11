@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class TouchScreen : MonoBehaviour
@@ -9,9 +10,11 @@ public class TouchScreen : MonoBehaviour
    [SerializeField] float rotateSpeed = 10f;
    [SerializeField] float waitTime = 2f;
    [SerializeField] GameObject upmove;
-    public bool ShouldMove = false;
-    public bool ShouldAttack = false;
-
+    public bool ShouldMove = true;
+    public float maxY = 130f; // 원하는 Y 축 최대 높이
+    private bool canMove = true;
+    private bool canMoveUp = true;
+    private bool canAttack = true;
     Animator animator;
     ParticleSystem Swim;
     GameObject punisher;
@@ -28,52 +31,67 @@ public class TouchScreen : MonoBehaviour
     {
         if (ShouldMove) // 움직임이 true 일때 실행
         {
-            //수영 애니메이션 실행
-            animator.SetBool("Sprint", true);
-            //공격 애니메이션 멈춤
-            animator.SetBool("Attack", false);
-            //악어가 보아야할 방향을 targetRotation 로 지정
-            Quaternion targetRotation = Quaternion.LookRotation(punisher.transform.position - transform.position);
-            //회전을 스무스 하게 targetRotation 방향으로 함 
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
-            //움직임은 포인트의 위치로 이동
-            transform.position = Vector3.MoveTowards(transform.position, punisher.transform.position, moveSpeed * Time.deltaTime);
-            //공격 비활성화
-            ShouldAttack = false;
+            if(canMove)
+            {
+                animator.SetBool("Sprint", true);
+                //악어가 보아야할 방향을 targetRotation 로 지정
+                Quaternion targetRotation = Quaternion.LookRotation(punisher.transform.position - transform.position);
+                //회전을 스무스 하게 targetRotation 방향으로 함 
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
+                //움직임은 포인트의 위치로 이동
+                transform.position = Vector3.MoveTowards(transform.position, punisher.transform.position, moveSpeed * Time.deltaTime);              
+            }                     
             //포인트의 위치가 0.2f보다 가까워 지면 
             if (Vector3.Distance(transform.position, punisher.transform.position) <= 0.2f)
             {
-                ShouldMove = false; //움직임 멈춤
+                canMove = false; //좌우 이동 금지
                 animator.SetBool("Sprint", false);//이동 애니메이션 멈춤
-                ShouldAttack = true;//공격 가능              
+                if (transform.position.y >= maxY)
+                {
+                    canMoveUp = false;
+                    if (canAttack)
+                    {
+                        StartCoroutine(Attack());
+                    }
+                }
+                if(transform.position.y <= maxY)
+                {
+                    Swim.gameObject.SetActive(false);
+                    StartCoroutine(Move());
+                }
             }
-        }
-        if (ShouldAttack)
-        {
-            ShouldAttack = false;
-            StartCoroutine(attack());
-            //공격 애니메이션 재생                             
-        }
+        }        
     }
-    IEnumerator attack()
+    
+    IEnumerator Move()
     {
-        Swim.Stop();
-        transform.Rotate(new Vector3(-90, 0, 0) * 0.8f);
-        transform.position = Vector3.MoveTowards(transform.position, upmove.transform.position, upSpeed); //카메라 방향으로 이동하게 해서 최대한 왜곡 줄임
-        animator.SetBool("Attack", true);
-        yield return new WaitForSeconds(1.4f); // 1초대기
-        animator.SetBool("Attack", false);
-        transform.position = new Vector3(transform.position.x, 12, transform.position.z);
-        transform.Rotate(new Vector3(90, 0, 0) * 0.8f);
-        Swim.Play();
-    }
+        Quaternion lookAt = Quaternion.identity;
+        Vector3 lookatVec = (upmove.transform.position - this.transform.position).normalized;
 
+        lookAt.SetLookRotation(lookatVec);
+        transform.root.rotation = lookAt;
+
+        transform.position = Vector3.Lerp(transform.position, upmove.transform.position, 0.01f);
+        transform.localScale = new Vector3(25, 25, 25);
+        yield return null;
+
+    }
+    IEnumerator Attack()
+    {
+        animator.SetBool("Attack", true);
+        Handheld.Vibrate();//진동주기
+        yield return new WaitForSeconds(0.3f);
+        animator.SetBool("Attack", false);
+        yield return new WaitForSeconds(0.8f);
+        canAttack = false;
+    }
     void OnAttackReady()
     {
-        animator.SetFloat("AttackSpeed", 1.5f);
+        animator.SetFloat("AttackSpeed", 1f);
     }
     void OnAttack()
     {
-        animator.SetFloat("AttackSpeed", 2f);
+        animator.SetFloat("AttackSpeed", 0.8f);
     }
+
 }
