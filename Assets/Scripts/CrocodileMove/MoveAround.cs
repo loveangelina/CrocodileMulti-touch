@@ -48,11 +48,13 @@ public class MoveAround : MonoBehaviour
 
     public void AroundMove()
     {
-        target = GameManager.Instance.Touchpoints[randomPositionIndex].GetComponent<Transform>().position - transform.position;
+        Vector3 randomOffset = Random.onUnitSphere * 5f; //반지름 5f로 무작위 생성
+        Vector3 randomPosition = GameManager.Instance.Touchpoints[randomPositionIndex].transform.position + randomOffset; //랜덤한 위치 생성
+        target = randomPosition - transform.position;
         //랜덤한 터치포인트를 향한 방향벡터
 
         //터치포인트 랜덤하게 돌기
-        transform.position = Vector3.MoveTowards(transform.position, GameManager.Instance.Touchpoints[randomPositionIndex].GetComponent<Transform>().position,
+        transform.position = Vector3.MoveTowards(transform.position,randomPosition,
         AroundSpeed * Time.deltaTime); //랜덤한 터치포인트로 이동
 
         //터치포인트를 향해 회전
