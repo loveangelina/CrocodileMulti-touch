@@ -79,6 +79,7 @@ public class TouchScreen : MonoBehaviour
     IEnumerator Attack()
     {
         animator.SetBool("Attack", true);
+        Handheld.Vibrate();//진동주기
         yield return new WaitForSeconds(0.3f);
         animator.SetBool("Attack", false);
         yield return new WaitForSeconds(0.8f);
