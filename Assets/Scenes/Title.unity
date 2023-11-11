@@ -97,8 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 7f5c76f61d5d5344186f68772295ed3f, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 1df3887fcc44c7343a79fa11b7b0947c, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -5095,6 +5095,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 2
+  isOpenPnl: 0
 --- !u!1001 &565432403
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16598,7 +16599,7 @@ MonoBehaviour:
   lightingMethod: 2
   enableShadows: 0
   shadowCaster: {fileID: 1628943269}
-  currentCam: {fileID: 0}
+  currentCam: {fileID: 813950201}
   material: {fileID: 2100000, guid: b56c186fcd781b54eafcd22192812439, type: 2}
   isMobileAdvanced: 1
   isMobilePlatform: 1
