@@ -25,7 +25,7 @@ public class GameUIManager : MonoBehaviour
         //TouchAgain 함수 잘 작동하는지 테스트용
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            TocuhAgain();
+            TouchAgain();
             
         }
     }*/
@@ -45,7 +45,7 @@ public class GameUIManager : MonoBehaviour
         txtGameStart.gameObject.SetActive(false);
     }
 
-    public void TocuhAgain()
+    public void TouchAgain()
     {
         pnlTouchAgain.SetActive(true); // Panel을 활성화
 
@@ -74,5 +74,4 @@ public class GameUIManager : MonoBehaviour
     {
         pnlBittenPay.gameObject.SetActive(true);
     }
-
 }
