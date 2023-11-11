@@ -310,6 +310,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31d98eff112c3bb45afa065689d6945a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  circlePrefab: {fileID: 1000012989429848, guid: 672bf737e1f3d6340b576c26f9bc9b34, type: 3}
+  DebugMode: 0
 --- !u!4 &14790533
 Transform:
   m_ObjectHideFlags: 0
@@ -12425,7 +12427,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1657175640
 PrefabInstance:
@@ -14613,7 +14615,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pnlTouchAgain: {fileID: 732449034470298525}
   txtGameStart: {fileID: 732449034879486095}
-  pnlBittenPay: {fileID: 0}
+  testbtn: {fileID: 0}
 --- !u!4 &1905961182
 Transform:
   m_ObjectHideFlags: 0
@@ -14626,7 +14628,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1925430492
 PrefabInstance:
@@ -15048,8 +15050,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shaderNames:
+  - Desktop
   - Mobile
-  shaderIndex: 0
+  shaderIndex: 1
   shader: {fileID: 4800000, guid: 644d4419f6d30214892dd65158332ba7, type: 3}
   renderQueue: 3000
   enableVertexColors: 1
@@ -15193,7 +15196,7 @@ MonoBehaviour:
   currentCam: {fileID: 0}
   material: {fileID: 2100000, guid: f6317624d362488489be67462f09d002, type: 2}
   isMobileAdvanced: 1
-  isMobilePlatform: 1
+  isMobilePlatform: 0
   shaderName: StylizedWater/Mobile
   isWaterLayer: 1
   hasShaderParams: 1
@@ -15997,7 +16000,7 @@ Transform:
   - {fileID: 8639111}
   - {fileID: 390553086}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2146644583
 GameObject:
@@ -16340,9 +16343,8 @@ RectTransform:
   m_Children:
   - {fileID: 732449034470298522}
   - {fileID: 732449034879486094}
-  - {fileID: 21485580}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -16499,6 +16501,7 @@ GameObject:
   - component: {fileID: 5866666021865978302}
   - component: {fileID: 766755660}
   - component: {fileID: 919132149202909567}
+  - component: {fileID: 919132149202909568}
   m_Layer: 0
   m_Name: Crocodile PolyArt
   m_TagString: Untagged
@@ -16522,6 +16525,20 @@ MonoBehaviour:
   startWaitTime: 0
   AroundSpeed: 30
   AroundAngleSpeed: 2
+--- !u!114 &919132149202909568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149202909566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27a48e20c264cfe4c842a966b969b10e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upmove: {fileID: 0}
+  maxY: 130
 --- !u!4 &948482793393660491
 Transform:
   m_ObjectHideFlags: 0

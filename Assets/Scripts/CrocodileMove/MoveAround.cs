@@ -13,22 +13,19 @@ public class MoveAround : MonoBehaviour
     int randomPositionIndex;
     Vector3 randomOffset;
     Vector3 randomPosition;
-    bool canMove = false;
-    RandomMove randomMove;
+    bool canMove = true;
     void Start()
     {
-        randomMove = new RandomMove();
         waitTime = startWaitTime;
         animator = GetComponent<Animator>();
         MakingAroundSpot();
-        randomPositionIndex = Random.Range(0, GameManager.Instance.Touchpoints.Count);
         randomOffset = Random.onUnitSphere * 5f; //반지름 5f로 무작위 생성
         randomPosition = GameManager.Instance.Touchpoints[randomPositionIndex].transform.position + randomOffset; //랜덤한 위치 생성
     }
 
     void Update()
-    {      
-        if (canMove)
+    {
+        if(canMove)
         {
             AroundMove();//회전과 움직임
             animator.SetBool("Sprint", true);
@@ -60,7 +57,6 @@ public class MoveAround : MonoBehaviour
 
     public void AroundMove()
     {
-        randomPositionIndex = Random.Range(0, GameManager.Instance.Touchpoints.Count);
         randomOffset = Random.onUnitSphere * 5f; //반지름 5f로 무작위 생성
         randomPosition = GameManager.Instance.Touchpoints[randomPositionIndex].transform.position + randomOffset; //랜덤한 위치 생성
         target = randomPosition - transform.position;
@@ -73,13 +69,5 @@ public class MoveAround : MonoBehaviour
         //터치포인트를 향해 회전
         Quaternion AroundAngle = Quaternion.LookRotation(target);
         transform.rotation = Quaternion.Slerp(transform.rotation, AroundAngle, AroundAngleSpeed * Time.deltaTime);
-    }
-    void DisableFirstScript()
-    {
-        RandMove firstScrpit = GetComponent<RandMove>();
-        if (firstScrpit!=null)
-        {
-            firstScrpit.enabled = false;
-        }
     }
 }
