@@ -11,29 +11,38 @@ public class MoveAround : MonoBehaviour
     Vector3 target;
     Animator animator;
     int randomPositionIndex;
-
+    Vector3 randomOffset;
+    Vector3 randomPosition;
+    bool canMove = true;
     void Start()
     {
         waitTime = startWaitTime;
         animator = GetComponent<Animator>();
         MakingAroundSpot();
+        randomOffset = Random.onUnitSphere * 5f; //반지름 5f로 무작위 생성
+        randomPosition = GameManager.Instance.Touchpoints[randomPositionIndex].transform.position + randomOffset; //랜덤한 위치 생성
     }
 
     void Update()
     {
-        AroundMove();//회전과 움직임
-        animator.SetBool("Sprint", true);
-        float dis = Vector3.Distance(transform.position, GameManager.Instance.Touchpoints[randomPositionIndex].transform.position);
+        if(canMove)
+        {
+            AroundMove();//회전과 움직임
+            animator.SetBool("Sprint", true);
+        }       
+        float dis = Vector3.Distance(transform.position,randomPosition);
         if (dis < 0.2f)
         {
             if (waitTime <= 0)
             {
                 MakingAroundSpot();//랜덤으로 가야할곳 설정
+                canMove = true;
                 waitTime = Random.Range(0, 2f);
                 startWaitTime = waitTime;
             }
             else
             {
+                canMove = false;
                 animator.SetBool("Sprint", false);
                 waitTime -= Time.deltaTime;
             }
@@ -48,8 +57,8 @@ public class MoveAround : MonoBehaviour
 
     public void AroundMove()
     {
-        Vector3 randomOffset = Random.onUnitSphere * 5f; //반지름 5f로 무작위 생성
-        Vector3 randomPosition = GameManager.Instance.Touchpoints[randomPositionIndex].transform.position + randomOffset; //랜덤한 위치 생성
+        randomOffset = Random.onUnitSphere * 5f; //반지름 5f로 무작위 생성
+        randomPosition = GameManager.Instance.Touchpoints[randomPositionIndex].transform.position + randomOffset; //랜덤한 위치 생성
         target = randomPosition - transform.position;
         //랜덤한 터치포인트를 향한 방향벡터
 
