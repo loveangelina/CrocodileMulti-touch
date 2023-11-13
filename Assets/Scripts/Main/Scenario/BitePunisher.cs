@@ -11,7 +11,7 @@ public class BitePunisher : ScenarioBase
     {
         GameObject crocodile = FindObjectOfType<RandMove>().gameObject;
         crocodile.GetComponent<MoveAround>().enabled = false;
-        crocodile.GetComponent<upMove>().enabled = true;
+        crocodile.GetComponent<TouchScreen>().enabled = true;
 
         // 벌칙자 선정 UI 활성화
         StartCoroutine(ShowPunisherUI());

@@ -22,17 +22,19 @@ public class TouchScreen : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        punisher =GameManager.Instance.Touchpoints[GameManager.Instance.PunisherIndex];//패배자 선정
+        punisher = GameManager.Instance.Touchpoints[GameManager.Instance.PunisherIndex];//패배자 선정
         Swim = GetComponentInChildren<ParticleSystem>();
         upmove = GameObject.FindGameObjectWithTag("MainCamera");
     }
 
     void Update()
     {
-        if (ShouldMove) // 움직임이 true 일때 실행
+        //if (ShouldMove) // 움직임이 true 일때 실행
         {
             if(canMove)
             {
+                // 벌칙자에게 이동
+
                 animator.SetBool("Sprint", true);
                 //악어가 보아야할 방향을 targetRotation 로 지정
                 Quaternion targetRotation = Quaternion.LookRotation(punisher.transform.position - transform.position);
@@ -40,24 +42,29 @@ public class TouchScreen : MonoBehaviour
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
                 //움직임은 포인트의 위치로 이동
                 transform.position = Vector3.MoveTowards(transform.position, punisher.transform.position, moveSpeed * Time.deltaTime);              
-            }                     
-            //포인트의 위치가 0.2f보다 가까워 지면 
-            if (Vector3.Distance(transform.position, punisher.transform.position) <= 0.2f)
+            }   
+            else
             {
-                canMove = false; //좌우 이동 금지
-                animator.SetBool("Sprint", false);//이동 애니메이션 멈춤
-                if (transform.position.y >= maxY)
+                // 카메라 쪽으로 위로 이동
+
+                //포인트의 위치가 0.2f보다 가까워 지면 
+                if (Vector3.Distance(transform.position, punisher.transform.position) <= 0.2f)
                 {
-                    canMoveUp = false;
-                    if (canAttack)
+                    canMove = false; //좌우 이동 금지
+                    animator.SetBool("Sprint", false);//이동 애니메이션 멈춤
+                    if (transform.position.y >= maxY)
                     {
-                        StartCoroutine(Attack());
+                        canMoveUp = false;
+                        if (canAttack)
+                        {
+                            StartCoroutine(Attack());
+                        }
                     }
-                }
-                if(transform.position.y <= maxY)
-                {
-                    Swim.gameObject.SetActive(false);
-                    StartCoroutine(Move());
+                    if (transform.position.y <= maxY)
+                    {
+                        Swim.gameObject.SetActive(false);
+                        StartCoroutine(Move());
+                    }
                 }
             }
         }        
