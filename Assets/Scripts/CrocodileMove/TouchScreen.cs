@@ -58,12 +58,18 @@ public class TouchScreen : MonoBehaviour
                 //if (Vector3.Distance(transform.position, punisher.transform.position) < 0.2f)
                 {
                     //canMove = false; //좌우 이동 금지
-                    animator.SetBool("Sprint", false);//이동 애니메이션 멈춤
+                    //animator.SetBool("Sprint", false);//이동 애니메이션 멈춤
                     if (transform.position.y >= maxY)
                     {
                         // Attack
                         animator.SetTrigger("Attack");
+
+                        //Debug.Log("attack");
+
+                        // TODO : 
                         //Handheld.Vibrate();//진동주기
+
+
                         //animator.SetBool("Attack", false);
 
                         //canMoveUp = false;

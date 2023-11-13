@@ -31,7 +31,7 @@ public class MoveAround : MonoBehaviour
         if(canMove)
         {
             SetRandomPosition();
-            animator.SetBool("Sprint", false);
+            //animator.SetBool("Sprint", false);
             canMove = false;
         }   
         else
