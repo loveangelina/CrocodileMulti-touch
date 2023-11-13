@@ -3322,7 +3322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   circlePrefab: {fileID: 1000012989429848, guid: 672bf737e1f3d6340b576c26f9bc9b34, type: 3}
-  DebugMode: 1
+  DebugMode: 0
 --- !u!1001 &402104037
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9208,7 +9208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6393324bc26c8b24e85601497ef9ceb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveTime: 10
+  moveTime: 5
 --- !u!1001 &1141275941
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14692,7 +14692,7 @@ MonoBehaviour:
   upRight: {fileID: 700129735}
   screenWidth: 0
   screenHeight: 0
-  debugMode: 1
+  debugMode: 0
 --- !u!1001 &1960671829
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16069,7 +16069,7 @@ Transform:
   m_GameObject: {fileID: 919132149202909566}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -49.1, y: 12.16, z: -96.6}
-  m_LocalScale: {x: 15, y: 10, z: 10}
+  m_LocalScale: {x: 20, y: 15, z: 15}
   m_Children:
   - {fileID: 7616818731724291723}
   - {fileID: 6468500280368008231}
@@ -16478,8 +16478,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitTime: 0
   startWaitTime: 0
-  AroundSpeed: 30
+  AroundSpeed: 50
   AroundAngleSpeed: 2
+  touchpoints: []
 --- !u!114 &919132149202909568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16489,10 +16490,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 919132149202909566}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27a48e20c264cfe4c842a966b969b10e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d4e9fe285e0fca45a41ea6813d4e060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 50
+  upSpeed: 100
+  rotateSpeed: 10
+  waitTime: 2
   upmove: {fileID: 0}
+  ShouldMove: 1
   maxY: 130
 --- !u!4 &948482793393660491
 Transform:
