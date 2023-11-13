@@ -13,7 +13,7 @@ public class TouchScreen : MonoBehaviour
     public bool ShouldMove = true;
     public float maxY = 130f; // 원하는 Y 축 최대 높이
     private bool canMove = true;
-    private bool canMoveUp = true;
+    private bool canMoveUp = false;
     private bool canAttack = true;
     Animator animator;
     ParticleSystem Swim;
@@ -31,7 +31,7 @@ public class TouchScreen : MonoBehaviour
     {
         //if (ShouldMove) // 움직임이 true 일때 실행
         {
-            if(canMove)
+            if (!canMoveUp)
             {
                 // 벌칙자에게 이동
 
@@ -41,29 +41,49 @@ public class TouchScreen : MonoBehaviour
                 //회전을 스무스 하게 targetRotation 방향으로 함 
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
                 //움직임은 포인트의 위치로 이동
-                transform.position = Vector3.MoveTowards(transform.position, punisher.transform.position, moveSpeed * Time.deltaTime);              
-            }   
+                transform.position = Vector3.MoveTowards(transform.position, punisher.transform.position, moveSpeed * Time.deltaTime);
+                Debug.Log("벌칙자 위치 : " + punisher.transform.position);
+
+                //포인트의 위치가 0.2f보다 가까워 지면 
+                if (Vector3.Distance(transform.position, punisher.transform.position) < 0.2f)
+                {
+                    canMoveUp = true;
+                }
+            }
             else
             {
                 // 카메라 쪽으로 위로 이동
 
                 //포인트의 위치가 0.2f보다 가까워 지면 
-                if (Vector3.Distance(transform.position, punisher.transform.position) <= 0.2f)
+                //if (Vector3.Distance(transform.position, punisher.transform.position) < 0.2f)
                 {
-                    canMove = false; //좌우 이동 금지
+                    //canMove = false; //좌우 이동 금지
                     animator.SetBool("Sprint", false);//이동 애니메이션 멈춤
                     if (transform.position.y >= maxY)
                     {
-                        canMoveUp = false;
-                        if (canAttack)
-                        {
-                            StartCoroutine(Attack());
-                        }
+                        // Attack
+                        animator.SetTrigger("Attack");
+                        //Handheld.Vibrate();//진동주기
+                        //animator.SetBool("Attack", false);
+
+                        //canMoveUp = false;
+                        //if (canAttack)
+                        //{
+                        //    StartCoroutine(Attack());
+                        //}
                     }
-                    if (transform.position.y <= maxY)
+                    if (transform.position.y < maxY)
                     {
                         Swim.gameObject.SetActive(false);
-                        StartCoroutine(Move());
+
+                        Quaternion lookAt = Quaternion.identity;
+                        Vector3 lookatVec = (upmove.transform.position - this.transform.position).normalized;
+
+                        lookAt.SetLookRotation(lookatVec);
+                        transform.root.rotation = lookAt;
+
+                        transform.position = Vector3.Lerp(transform.position, upmove.transform.position, 0.01f);
+                        transform.localScale = new Vector3(25, 25, 25);
                     }
                 }
             }
@@ -72,14 +92,7 @@ public class TouchScreen : MonoBehaviour
     
     IEnumerator Move()
     {
-        Quaternion lookAt = Quaternion.identity;
-        Vector3 lookatVec = (upmove.transform.position - this.transform.position).normalized;
-
-        lookAt.SetLookRotation(lookatVec);
-        transform.root.rotation = lookAt;
-
-        transform.position = Vector3.Lerp(transform.position, upmove.transform.position, 0.01f);
-        transform.localScale = new Vector3(25, 25, 25);
+        
         yield return null;
 
     }

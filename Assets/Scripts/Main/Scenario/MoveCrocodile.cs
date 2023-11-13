@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveCrocodile : ScenarioBase
 {
-    [SerializeField] float moveTime = 10f;
+    [SerializeField] float moveTime = 4f;
 
     public override void Enter(ScenarioController controller)
     {
@@ -28,7 +28,7 @@ public class MoveCrocodile : ScenarioBase
         crocodile.GetComponent<RandMove>().enabled = false;
         crocodile.GetComponent<MoveAround>().enabled = true;
 
-        Debug.Log("악어가 5초간 터치포인트 주위를 돔");
+        Debug.Log("악어가 4초간 터치포인트 주위를 돔");
         yield return new WaitForSeconds(moveTime);
 
         controller.SetNextScenario();
