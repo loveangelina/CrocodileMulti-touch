@@ -22,7 +22,6 @@ public class RandMove : MonoBehaviour
     private void Update()
     {
         Move(); //움직임 활성화
-        animator.SetBool("Sprint", true); // 애니메이션 움직임 활성화
 
         if (Vector3.Distance(transform.position, moveSpots[randomSpot].position) <= 0.2f) // 무브스팟과의 거리가 0.1f 보다 가까워지면
         {
@@ -30,13 +29,11 @@ public class RandMove : MonoBehaviour
             if (waitTime <= 0)
             {                       
                 randomSpotMaking();//랜덤으로 가야할곳 설정
-                //IsMove = false; //움직임 활성화
                 waitTime = Random.Range(0, 2f);                      
                 startWaitTime = waitTime;
             }
             else
             {                       
-                animator.SetBool("Sprint", false);
                 waitTime -= Time.deltaTime;
             }
         }               

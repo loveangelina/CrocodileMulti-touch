@@ -9208,7 +9208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6393324bc26c8b24e85601497ef9ceb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveTime: 4
+  moveTime: 5
 --- !u!1001 &1141275941
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16478,7 +16478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitTime: 0
   startWaitTime: 0
-  AroundSpeed: 30
+  AroundSpeed: 50
   AroundAngleSpeed: 2
   touchpoints: []
 --- !u!114 &919132149202909568
@@ -16493,7 +16493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d4e9fe285e0fca45a41ea6813d4e060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 30
+  moveSpeed: 50
   upSpeed: 100
   rotateSpeed: 10
   waitTime: 2
