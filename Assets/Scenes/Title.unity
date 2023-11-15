@@ -17167,7 +17167,9 @@ MonoBehaviour:
   sfxSource: {fileID: 1994611486}
   gameStartClip: {fileID: 8300000, guid: 3c8e1b51a59b6da42b0823020f826bf1, type: 3}
   buttonClickClip: {fileID: 8300000, guid: cb8d1f9f8bcfd7744bc5c09e074bdeb6, type: 3}
-  gamebgmClip: {fileID: 8300000, guid: cb7cacd676c552e4f998fffef6449bf8, type: 3}
+  bgmClips:
+  - {fileID: 8300000, guid: 9c133bbbe52c215449d7292bb2e32baf, type: 3}
+  - {fileID: 8300000, guid: cb7cacd676c552e4f998fffef6449bf8, type: 3}
   bgmSlider: {fileID: 1080035504}
   sfxSlider: {fileID: 392288431}
   bgmToggle: {fileID: 1973115047}
