@@ -1212,7 +1212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6393324bc26c8b24e85601497ef9ceb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveTime: 5
+  moveTime: 15
 --- !u!1 &1554380869
 GameObject:
   m_ObjectHideFlags: 0
@@ -23914,7 +23914,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitTime: 0
   startWaitTime: 0
-  AroundSpeed: 40
+  AroundSpeed: 60
   AroundAngleSpeed: 2
   touchpoints: []
 --- !u!114 &919132149202909568
@@ -23929,7 +23929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d4e9fe285e0fca45a41ea6813d4e060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 50
+  moveSpeed: 120
   upSpeed: 100
   rotateSpeed: 10
   waitTime: 2

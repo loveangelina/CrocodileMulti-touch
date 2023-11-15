@@ -17,7 +17,8 @@ public class CheckNumberOfTouchpoints : ScenarioBase
 
     private Dictionary<GameObject, bool> touchPoints = new Dictionary<GameObject, bool>();
 
-    private float timer = 5f; // 시간 제한 설정 (5초)
+    private float time = 5f; // 시간 제한 설정 (5초)
+    //[SerializeField] float timer = 0f;
 
     GameUIManager gameUIManager;
 
@@ -37,6 +38,8 @@ public class CheckNumberOfTouchpoints : ScenarioBase
 
     public override void Execute(ScenarioController controller)
     {
+        //timer += Time.deltaTime;
+        //Debug.Log(timer);
         // 터치 입력이 발생했을 때
         if (Input.touchCount > 0)
         {
@@ -64,6 +67,7 @@ public class CheckNumberOfTouchpoints : ScenarioBase
                 {
                     Debug.Log("벌칙자 선정 단계로 넘어감");
                     controller.SetNextScenario();
+                    //StartCoroutine(WaitAndProceed(controller));
                 }
             }
         }
@@ -142,7 +146,7 @@ public class CheckNumberOfTouchpoints : ScenarioBase
 
     IEnumerator StartTimer(ScenarioController controller)
     {
-        yield return new WaitForSeconds(timer);
+        yield return new WaitForSeconds(time);
 
         // 시간 내에 모든 터치포인트가 클릭되지 않았을 때
         if (!AreAllCirclesTouched())
@@ -180,5 +184,14 @@ public class CheckNumberOfTouchpoints : ScenarioBase
             Debug.Log("Key: " + entry.Key.transform.position +
                         " / value : " + entry.Value);
         }
+    }
+
+    IEnumerator WaitAndProceed(ScenarioController controller)
+    {
+        // 남은 시간 기다리고 넘어가기
+        //yield return new WaitForSeconds(time - timer);
+        yield return null;
+
+        
     }
 }
