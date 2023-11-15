@@ -20,7 +20,7 @@ namespace StylizedWaterShader
         private float cameraRotUpCur;
         private float distance;
 
-      
+
 
 
         void Start()
@@ -34,42 +34,90 @@ namespace StylizedWaterShader
             distance = -cam.localPosition.z;
         }
 
+        //    void Update()
+        //    {
+        //        if (!pivot) return;
+
+
+
+        //            if (Input.GetMouseButton(0) && enableMouse&& UIManager.Instance.isOpenPnl == false)
+        //            {
+        //                cameraRotSide += Input.GetAxis("Mouse X") * 5;
+        //                cameraRotUp -= Input.GetAxis("Mouse Y") * 5;
+
+        //            }
+        //            else
+        //            {
+        //                cameraRotSide += idleRotationSpeed;
+        //            }
+        //            cameraRotSideCur = Mathf.LerpAngle(cameraRotSideCur, cameraRotSide, Time.deltaTime * 5);
+        //            //cameraRotUpCur = Mathf.Lerp(cameraRotUpCur, cameraRotUp, Time.deltaTime * 5);
+        //            cameraRotUpCur = Mathf.Clamp(Mathf.Lerp(cameraRotUpCur, cameraRotUp, Time.deltaTime * 5), 0f, 90f);
+
+
+        //            if (Input.GetMouseButton(1) && enableMouse&& UIManager.Instance.isOpenPnl == false)
+        //            {
+        //                distance *= (1 - 0.1f * Input.GetAxis("Mouse Y"));
+
+        //            }
+
+        //            Vector3 targetPoint = pivot.position;
+        //            transform.position = Vector3.Lerp(transform.position, targetPoint, Time.deltaTime);
+        //            transform.rotation = Quaternion.Euler(cameraRotUpCur, cameraRotSideCur, 0);
+
+        //            float dist = Mathf.Lerp(-cam.transform.localPosition.z, distance, Time.deltaTime * 5);
+        //            cam.localPosition = -Vector3.forward * dist;
+
+
+
+        //    }
+        //}
         void Update()
         {
             if (!pivot) return;
 
+            // 터치 입력 확인
+            if (Input.touchCount > 0 && enableMouse && UIManager.Instance.isOpenPnl == false)
+            {
+                Touch touch = Input.GetTouch(0);
 
-          
-                if (Input.GetMouseButton(0) && enableMouse&& UIManager.Instance.isOpenPnl == false)
+                // 단일 터치로 회전 및 이동 처리
+                if (touch.phase == TouchPhase.Moved)
                 {
-                    cameraRotSide += Input.GetAxis("Mouse X") * 5;
-                    cameraRotUp -= Input.GetAxis("Mouse Y") * 5;
-
+                    cameraRotSide += touch.deltaPosition.x * 0.1f;
+                    cameraRotUp -= touch.deltaPosition.y * 0.1f;
                 }
-                else
-                {
-                    cameraRotSide += idleRotationSpeed;
-                }
-                cameraRotSideCur = Mathf.LerpAngle(cameraRotSideCur, cameraRotSide, Time.deltaTime * 5);
-                //cameraRotUpCur = Mathf.Lerp(cameraRotUpCur, cameraRotUp, Time.deltaTime * 5);
-                cameraRotUpCur = Mathf.Clamp(Mathf.Lerp(cameraRotUpCur, cameraRotUp, Time.deltaTime * 5), 0f, 90f);
+            }
+            else
+            {
+                cameraRotSide += idleRotationSpeed;
+            }
 
+            // 회전 및 립 처리
+            cameraRotSideCur = Mathf.LerpAngle(cameraRotSideCur, cameraRotSide, Time.deltaTime * 5);
+            cameraRotUpCur = Mathf.Clamp(Mathf.Lerp(cameraRotUpCur, cameraRotUp, Time.deltaTime * 5), 0f, 90f);
 
-                if (Input.GetMouseButton(1) && enableMouse&& UIManager.Instance.isOpenPnl == false)
-                {
-                    distance *= (1 - 0.1f * Input.GetAxis("Mouse Y"));
-               
-                }
+            // 줌 처리
+            if (Input.touchCount > 1 && enableMouse && UIManager.Instance.isOpenPnl == false)
+            {
+                Touch touch1 = Input.GetTouch(0);
+                Touch touch2 = Input.GetTouch(1);
 
-                Vector3 targetPoint = pivot.position;
-                transform.position = Vector3.Lerp(transform.position, targetPoint, Time.deltaTime);
-                transform.rotation = Quaternion.Euler(cameraRotUpCur, cameraRotSideCur, 0);
+                // 두 터치 사이의 거리 계산
+                float distanceBetweenTouches = Vector2.Distance(touch1.position, touch2.position);
 
-                float dist = Mathf.Lerp(-cam.transform.localPosition.z, distance, Time.deltaTime * 5);
-                cam.localPosition = -Vector3.forward * dist;
-            
+                // 줌 인/아웃 처리
+                distance *= (1 - 0.1f * (distanceBetweenTouches - touch1.deltaPosition.magnitude - touch2.deltaPosition.magnitude));
+            }
 
+            // 피벗 중심으로 이동 및 회전
+            Vector3 targetPoint = pivot.position;
+            transform.position = Vector3.Lerp(transform.position, targetPoint, Time.deltaTime);
+            transform.rotation = Quaternion.Euler(cameraRotUpCur, cameraRotSideCur, 0);
 
+            // 카메라 거리 조절
+            float dist = Mathf.Lerp(-cam.transform.localPosition.z, distance, Time.deltaTime * 5);
+            cam.localPosition = -Vector3.forward * dist;
         }
     }
 }
