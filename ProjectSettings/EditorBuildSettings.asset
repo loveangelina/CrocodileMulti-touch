@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LakeScene.unity
     guid: 2cbb8aa09b0fee44595256b8fa6a33b5
+  - enabled: 1
+    path: Assets/Scenes/End.unity
+    guid: 311563319e2217044b44b62a0fab055b
   m_configObjects: {}
