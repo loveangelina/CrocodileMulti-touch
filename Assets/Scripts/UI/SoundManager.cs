@@ -10,6 +10,7 @@ public class SoundManager : MonoBehaviour
 
     public AudioClip gameStartClip;
     public AudioClip buttonClickClip;
+    public AudioClip AttackClip;
     public AudioClip[] bgmClips;
 
     public Slider bgmSlider;
@@ -113,6 +114,11 @@ public class SoundManager : MonoBehaviour
         bgmSource.Stop();
         bgmSource.clip = bgmClips[index];
         bgmSource.Play();
+    }
+
+    public void Attack()
+    {
+        sfxSource.PlayOneShot(AttackClip);
     }
 
     public void SaveAudioSettings()
