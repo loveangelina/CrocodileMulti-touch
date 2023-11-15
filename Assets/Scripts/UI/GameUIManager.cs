@@ -10,10 +10,6 @@ public class GameUIManager : MonoBehaviour
     public Text txtGameStart;
     public GameObject pnlBittenPay;
 
-    //게임씬 카운트다운 변수
-    float countdownTime = 5f;
-
-
     private void Start()
     {
         //txtGameStart.gameObject.SetActive(true);
@@ -30,10 +26,11 @@ public class GameUIManager : MonoBehaviour
         }
     }*/
 
-
     public IEnumerator Countdown()
     {
-        countdownTime = 5f;
+        //게임씬 카운트다운 변수
+        float countdownTime = 5f;
+
         txtGameStart.gameObject.SetActive(true);
         while (countdownTime > 0)
         {
@@ -62,7 +59,7 @@ public class GameUIManager : MonoBehaviour
         pnlTouchAgain.SetActive(false); // Panel을 비활성화
 
         // 2초가 지난 후 Countdown 함수 호출
-        StartCoroutine(Countdown());
+        //StartCoroutine(Countdown());
     }
 
     public void DeActivePnl()
