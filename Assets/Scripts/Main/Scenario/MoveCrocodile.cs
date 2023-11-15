@@ -8,6 +8,7 @@ public class MoveCrocodile : ScenarioBase
 
     public override void Enter(ScenarioController controller)
     {
+        Debug.Log("Move Crocodile");
         StartCoroutine(MoveToPunisher(controller));
     }
 
