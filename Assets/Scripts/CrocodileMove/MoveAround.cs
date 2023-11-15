@@ -44,7 +44,7 @@ public class MoveAround : MonoBehaviour
     {
         randomPositionIndex = Random.Range(0, touchpoints.Count);
 
-        randomOffset = Random.onUnitSphere * 30f; //반지름 30f로 무작위 생성
+        randomOffset = Random.onUnitSphere * 60f; //반지름 30f로 무작위 생성
         randomPosition = touchpoints[randomPositionIndex].transform.position + new Vector3(randomOffset.x, 0f, randomOffset.z); //랜덤한 위치 생성
         Debug.Log("랜덤한 터치포인트 : " + randomPosition);
     }
