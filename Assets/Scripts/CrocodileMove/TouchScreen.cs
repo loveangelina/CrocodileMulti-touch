@@ -51,14 +51,6 @@ public class TouchScreen : MonoBehaviour
             if (transform.position.y >= maxY)
             {
                 animator.SetTrigger("Attack");
-<<<<<<< Updated upstream
-                
-                // TODO : 
-                //Handheld.Vibrate();//진동주기
-=======
-
-                //Handheld.Vibrate();
->>>>>>> Stashed changes
             }
             // 카메라 쪽으로 위로 이동
             if (transform.position.y < maxY)
