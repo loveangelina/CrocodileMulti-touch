@@ -15997,7 +15997,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -68, y: -74}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1911755235
 MonoBehaviour:
@@ -16969,7 +16969,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2cebe5ef59f447d4d803665e3ecf1a2f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 9c133bbbe52c215449d7292bb2e32baf, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -17167,6 +17167,9 @@ MonoBehaviour:
   sfxSource: {fileID: 1994611486}
   gameStartClip: {fileID: 8300000, guid: 3c8e1b51a59b6da42b0823020f826bf1, type: 3}
   buttonClickClip: {fileID: 8300000, guid: cb8d1f9f8bcfd7744bc5c09e074bdeb6, type: 3}
+  bgmClips:
+  - {fileID: 8300000, guid: 9c133bbbe52c215449d7292bb2e32baf, type: 3}
+  - {fileID: 8300000, guid: cb7cacd676c552e4f998fffef6449bf8, type: 3}
   bgmSlider: {fileID: 1080035504}
   sfxSlider: {fileID: 392288431}
   bgmToggle: {fileID: 1973115047}
