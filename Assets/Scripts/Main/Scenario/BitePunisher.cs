@@ -46,16 +46,18 @@ public class BitePunisher : ScenarioBase
             yield return null;
         }
         mainModule.startColor = new Color(1f, 0f, 0f);
+        SoundManager.Instance.Attack();
 
         // 악어가 벌칙자에게 이동하고 위로 올라오는 시간을 5초 줌
         yield return new WaitForSeconds(5f);
 
         // 벌칙자가 선정되었다는 UI를 띄움
-        //gameUIManager = FindObjectOfType<GameUIManager>();
-        //gameUIManager.BittenPay();
+        gameUIManager = FindObjectOfType<GameUIManager>();
+        gameUIManager.BittenPay();
 
         // 5초 후 타이틀씬으로 전환
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene("End");
+        SoundManager.Instance.SwapBGMClip(2);
     }
 }
