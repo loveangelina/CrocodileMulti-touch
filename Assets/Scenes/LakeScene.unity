@@ -281,51 +281,6 @@ Transform:
   m_Father: {fileID: 2136272284}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &14790531
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 14790533}
-  - component: {fileID: 14790532}
-  m_Layer: 0
-  m_Name: CircleSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &14790532
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 14790531}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31d98eff112c3bb45afa065689d6945a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  circlePrefab: {fileID: 1000012989429848, guid: 672bf737e1f3d6340b576c26f9bc9b34, type: 3}
-  DebugMode: 0
---- !u!4 &14790533
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 14790531}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &21485579
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,7 +298,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &21485580
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6040,7 +5995,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149202909566}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d915ba0998002c649a78cf029d64dbdd, type: 3}
   m_Name: 
@@ -9253,7 +9208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6393324bc26c8b24e85601497ef9ceb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveTime: 10
+  moveTime: 5
 --- !u!1001 &1141275941
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14615,7 +14570,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pnlTouchAgain: {fileID: 732449034470298525}
   txtGameStart: {fileID: 732449034879486095}
-  testbtn: {fileID: 0}
+  pnlBittenPay: {fileID: 21485579}
 --- !u!4 &1905961182
 Transform:
   m_ObjectHideFlags: 0
@@ -15050,9 +15005,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shaderNames:
-  - Desktop
   - Mobile
-  shaderIndex: 1
+  shaderIndex: 0
   shader: {fileID: 4800000, guid: 644d4419f6d30214892dd65158332ba7, type: 3}
   renderQueue: 3000
   enableVertexColors: 1
@@ -15193,10 +15147,10 @@ MonoBehaviour:
   lightingMethod: 1
   enableShadows: 1
   shadowCaster: {fileID: 1628943269}
-  currentCam: {fileID: 0}
+  currentCam: {fileID: 813950201}
   material: {fileID: 2100000, guid: f6317624d362488489be67462f09d002, type: 2}
   isMobileAdvanced: 1
-  isMobilePlatform: 0
+  isMobilePlatform: 1
   shaderName: StylizedWater/Mobile
   isWaterLayer: 1
   hasShaderParams: 1
@@ -16114,8 +16068,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149202909566}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.07, y: 12.16, z: -62.8}
-  m_LocalScale: {x: 15, y: 10, z: 10}
+  m_LocalPosition: {x: -49.1, y: 12.16, z: -96.6}
+  m_LocalScale: {x: 20, y: 15, z: 15}
   m_Children:
   - {fileID: 7616818731724291723}
   - {fileID: 6468500280368008231}
@@ -16343,6 +16297,7 @@ RectTransform:
   m_Children:
   - {fileID: 732449034470298522}
   - {fileID: 732449034879486094}
+  - {fileID: 21485580}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16523,8 +16478,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitTime: 0
   startWaitTime: 0
-  AroundSpeed: 30
+  AroundSpeed: 50
   AroundAngleSpeed: 2
+  touchpoints: []
 --- !u!114 &919132149202909568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16532,15 +16488,17 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132149202909566}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27a48e20c264cfe4c842a966b969b10e, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d4e9fe285e0fca45a41ea6813d4e060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 50
+  upSpeed: 100
+  rotateSpeed: 10
+  waitTime: 2
   upmove: {fileID: 0}
-  StopMove:
-    m_PersistentCalls:
-      m_Calls: []
+  ShouldMove: 1
   maxY: 130
 --- !u!4 &948482793393660491
 Transform:

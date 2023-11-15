@@ -46,13 +46,11 @@ public class upMove : MonoBehaviour
         Vector3 lookatVec = (upmove.transform.position - this.transform.position).normalized;
         
         lookAt.SetLookRotation(lookatVec);
-        transform.root.rotation = lookAt;
+        transform.rotation = lookAt;
         
         transform.position = Vector3.Lerp(transform.position, upmove.transform.position, 0.01f);       
         transform.localScale = new Vector3(25,25,25);
-        yield return null;   
-       
-
+        yield return null;          
     }
     IEnumerator Attack()
     {

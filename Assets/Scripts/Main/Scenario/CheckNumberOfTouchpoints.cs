@@ -148,7 +148,7 @@ public class CheckNumberOfTouchpoints : ScenarioBase
         if (!AreAllCirclesTouched())
         {
             // 오류 메세지 UI 띄우고 카운트다운 UI 띄움
-            gameUIManager.TocuhAgain();
+            gameUIManager.TouchAgain();
             yield return new WaitForSeconds(2f);
 
             controller.SetNextScenario(-1);

@@ -16,9 +16,18 @@ public class CreateTouchpoints : ScenarioBase
         // 터치포인트 초기화
         GameManager.Instance.ClearTouchpoints();
 
+        // 악어 RandMove 활성화 (랜덤 움직임)
+        GameObject crocodile = FindObjectOfType<RandMove>().gameObject;
+        crocodile.GetComponent<RandMove>().enabled = true;
+
         numberOfParticipants = UIManager.Instance.value;
         obstacleLayer = LayerMask.GetMask("Terrain", "Effect");
         SpawnCircles();
+
+        // 터치하라는 UI 활성화
+        GameUIManager uiManager = FindObjectOfType<GameUIManager>();
+        StartCoroutine(uiManager.Countdown());
+
         controller.SetNextScenario();
     }
 

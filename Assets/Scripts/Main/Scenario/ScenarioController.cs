@@ -15,6 +15,7 @@ public class ScenarioController : MonoBehaviour
 	private void Start()
 	{
 		SetNextScenario();
+		Debug.Log(currentIndex);
 	}
 
 	private void Update()
