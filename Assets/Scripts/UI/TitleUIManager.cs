@@ -128,6 +128,7 @@ public class TitleUIManager : MonoBehaviour
     public void OnClickGameStart()
     {
         SceneManager.LoadScene("LakeScene");
+        SoundManager.Instance.SwapBGMClip();
     }
     #endregion
 
